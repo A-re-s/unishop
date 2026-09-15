@@ -53,3 +53,13 @@ lint: lint-backend lint-frontend
 
 # Lint and autofix backend and frontend
 lint-fix: lint-backend-fix lint-frontend-fix
+
+# --- Pre-commit ---
+
+# Install git hooks (run once after clone)
+precommit-install:
+    pre-commit install
+
+# Run pre-commit hooks against all files
+precommit:
+    pre-commit run --all-files
