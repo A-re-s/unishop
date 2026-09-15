@@ -68,5 +68,19 @@ class Settings(BaseSettings):
     # Origins allowed to call the API with credentials (cookies) from JS
     cors_origins: list[str] = ["http://localhost:5173"]
 
+    # MinIO (S3-compatible photo storage). root_user/root_password match the
+    # root .env names (same credentials the minio container bootstraps with).
+    minio_host: str = "localhost"
+    minio_port: int = 9000
+    minio_root_user: str = "unishop"
+    minio_root_password: str = "change-me"
+    minio_bucket: str = "unishop"
+    minio_use_ssl: bool = False
+
+    @property
+    def minio_endpoint_url(self) -> str:
+        scheme = "https" if self.minio_use_ssl else "http"
+        return f"{scheme}://{self.minio_host}:{self.minio_port}"
+
 
 settings = Settings()

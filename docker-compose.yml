@@ -57,6 +57,35 @@ services:
       keycloak-postgres:
         condition: service_healthy
 
+  minio:
+    image: quay.io/minio/minio:latest
+    env_file:
+      - .env
+    command: server /data --console-address ":9001"
+    ports:
+      - "${MINIO_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_PORT:-9001}:9001"
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  minio-init:
+    image: quay.io/minio/mc:latest
+    env_file:
+      - .env
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 $$MINIO_ROOT_USER $$MINIO_ROOT_PASSWORD &&
+      mc mb --ignore-existing local/$$MINIO_BUCKET
+      "
+
   backend:
     build:
       context: ./backend
@@ -73,6 +102,8 @@ services:
       POSTGRES_PORT: "5432"
       REDIS_HOST: redis
       REDIS_PORT: "6379"
+      MINIO_HOST: minio
+      MINIO_PORT: "9000"
       KEYCLOAK_ISSUER: http://keycloak:8080/realms/unishop
     depends_on:
       postgres:
@@ -81,6 +112,8 @@ services:
         condition: service_healthy
       keycloak:
         condition: service_started
+      minio-init:
+        condition: service_completed_successfully
 
   frontend:
     build:
@@ -97,3 +130,4 @@ volumes:
   frontend-node-modules:
   postgres-data:
   keycloak-postgres-data:
+  minio-data:
