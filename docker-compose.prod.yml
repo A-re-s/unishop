@@ -1,10 +1,31 @@
 services:
+  postgres:
+    image: postgres:16-alpine
+    env_file:
+      - .env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   backend:
     build:
       context: ./backend
       target: runtime
     env_file:
+      - .env
       - ./backend/.env
+    environment:
+      # Always the container-internal port — independent of whatever host
+      # port POSTGRES_PORT (from the root .env) happens to publish it on.
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   frontend:
     build:
@@ -20,3 +41,6 @@ services:
     depends_on:
       - backend
       - frontend
+
+volumes:
+  postgres-data:

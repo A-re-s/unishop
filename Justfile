@@ -40,6 +40,20 @@ lint-frontend:
 lint-frontend-fix:
     cd frontend && npm run lint:fix
 
+# --- Database ---
+
+# Apply all pending migrations
+migrate:
+    cd backend && uv run alembic upgrade head
+
+# Revert the last migration
+migrate-down:
+    cd backend && uv run alembic downgrade -1
+
+# Generate a new migration from model changes
+makemigrations message:
+    cd backend && uv run alembic revision --autogenerate -m "{{ message }}"
+
 # --- Tests ---
 
 # Run backend tests
