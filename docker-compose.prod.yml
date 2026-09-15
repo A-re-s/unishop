@@ -11,6 +11,48 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  keycloak-postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: ${KEYCLOAK_DB_PASSWORD:-change-me}
+      POSTGRES_DB: keycloak
+    volumes:
+      - keycloak-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak -d keycloak"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0
+    # start (not start-dev): production mode still needs a real hostname/TLS
+    # setup to be fully correct — see the README note on going to production.
+    command: start --import-realm --hostname-strict=false --http-enabled=true
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD:-change-me}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-change-me}
+    volumes:
+      - ./keycloak/realm-import.json:/opt/keycloak/data/import/realm-import.json:ro
+    ports:
+      - "${KEYCLOAK_PORT:-8080}:8080"
+    depends_on:
+      keycloak-postgres:
+        condition: service_healthy
+
   backend:
     build:
       context: ./backend
@@ -19,13 +61,22 @@ services:
       - .env
       - ./backend/.env
     environment:
-      # Always the container-internal port — independent of whatever host
-      # port POSTGRES_PORT (from the root .env) happens to publish it on.
+      # Always container-internal — independent of whatever host port the
+      # root .env happens to publish these services on.
       POSTGRES_HOST: postgres
       POSTGRES_PORT: "5432"
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      KEYCLOAK_ISSUER: http://keycloak:8080/realms/unishop
+      API_ROOT_PATH: /api
+      SESSION_COOKIE_SECURE: "true"
     depends_on:
       postgres:
         condition: service_healthy
+      redis:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
 
   frontend:
     build:
@@ -44,3 +95,4 @@ services:
 
 volumes:
   postgres-data:
+  keycloak-postgres-data:
