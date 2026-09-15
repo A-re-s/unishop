@@ -77,6 +77,51 @@ precommit-install:
 precommit:
     pre-commit run --all-files
 
+# --- Docker Compose ---
+
+# Build and start all services
+up:
+    docker compose up --build -d
+
+# Stop and remove all services
+down:
+    docker compose down
+
+# Restart all services
+restart: down up
+
+# Restart only the backend service
+restart-backend:
+    docker compose restart backend
+
+# Restart only the frontend service
+restart-frontend:
+    docker compose restart frontend
+
+# Follow logs for all services
+logs:
+    docker compose logs -f
+
+# Follow logs for the backend service
+logs-backend:
+    docker compose logs -f backend
+
+# Follow logs for the frontend service
+logs-frontend:
+    docker compose logs -f frontend
+
+# Build all images
+build:
+    docker compose build
+
+# Build and start the production stack (nginx + prod images)
+up-prod:
+    docker compose -f docker-compose.prod.yml up --build -d
+
+# Stop and remove the production stack
+down-prod:
+    docker compose -f docker-compose.prod.yml down
+
 # --- Commits & Versioning ---
 
 # Create a commit interactively via Commitizen (Conventional Commits)
