@@ -1,0 +1,23 @@
+name: PR Title
+
+# PRs are merged with "Squash and merge", so the PR title becomes the squash
+# commit message on master — it must follow Conventional Commits, not the
+# individual (often messy) commits inside the branch.
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, edited, reopened, synchronize]
+
+jobs:
+  check-title:
+    name: Conventional Commits title
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install commitizen
+      - name: Check PR title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: cz check --message "$PR_TITLE"
