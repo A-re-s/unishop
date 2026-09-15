@@ -40,6 +40,19 @@ lint-frontend:
 lint-frontend-fix:
     cd frontend && npm run lint:fix
 
+# --- Tests ---
+
+# Run backend tests
+test-backend:
+    cd backend && uv run pytest
+
+# Run frontend tests
+test-frontend:
+    cd frontend && npm run test
+
+# Run backend and frontend tests
+test: test-backend test-frontend
+
 # --- Combined ---
 
 # Format backend and frontend
