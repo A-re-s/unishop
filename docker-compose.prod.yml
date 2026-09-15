@@ -3,6 +3,8 @@ services:
     build:
       context: ./backend
       target: runtime
+    env_file:
+      - ./backend/.env
 
   frontend:
     build:

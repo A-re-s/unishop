@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
-app = FastAPI(title="Unishop API")
+from backend.api.routers import health
+from backend.core.config import settings
 
+app = FastAPI(title=settings.app_name, debug=settings.debug)
 
-@app.get("/health")
-def health() -> dict[str, str]:
-    return {"status": "ok"}
+app.include_router(health.router)
