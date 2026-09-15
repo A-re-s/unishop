@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  push:
+    branches: [master]
+
+concurrency:
+  group: release-${{ github.workflow }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Bump version, changelog & release
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'bump:')"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Commitizen
+        run: pip install commitizen
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump version and update changelog
+        id: bump
+        run: |
+          set +e
+          output=$(cz bump --changelog --yes 2>&1)
+          exit_code=$?
+          echo "$output"
+          if [ $exit_code -eq 21 ]; then
+            echo "No commits require a version bump."
+            echo "released=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          elif [ $exit_code -ne 0 ]; then
+            exit $exit_code
+          fi
+          echo "released=true" >> "$GITHUB_OUTPUT"
+          echo "version=$(cz version --project)" >> "$GITHUB_OUTPUT"
+
+      - name: Push version bump and tag
+        if: steps.bump.outputs.released == 'true'
+        run: |
+          git push origin HEAD:master
+          git push origin "v${{ steps.bump.outputs.version }}"
+
+      - name: Create GitHub Release
+        if: steps.bump.outputs.released == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "v${{ steps.bump.outputs.version }}" \
+            --title "v${{ steps.bump.outputs.version }}" \
+            --notes-from-tag

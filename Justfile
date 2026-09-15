@@ -76,3 +76,17 @@ precommit-install:
 # Run pre-commit hooks against all files
 precommit:
     pre-commit run --all-files
+
+# --- Commits & Versioning ---
+
+# Create a commit interactively via Commitizen (Conventional Commits)
+commit:
+    cz commit
+
+# Check that a commit message follows Conventional Commits
+commit-check message:
+    cz check --message "{{ message }}"
+
+# Preview the next version bump and changelog without changing anything
+bump-preview:
+    cz bump --changelog --dry-run --yes

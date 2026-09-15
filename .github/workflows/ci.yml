@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  backend-lint:
+    name: Backend · Ruff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "backend/uv.lock"
+      - run: uv sync --locked
+        working-directory: backend
+      - run: uv run ruff format --check .
+        working-directory: backend
+      - run: uv run ruff check .
+        working-directory: backend
+
+  backend-tests:
+    name: Backend · Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "backend/uv.lock"
+      - run: uv sync --locked
+        working-directory: backend
+      - run: uv run pytest
+        working-directory: backend
+
+  frontend-lint:
+    name: Frontend · Biome
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Volta
+        run: |
+          curl -fsSL https://get.volta.sh | bash -s -- --skip-setup
+          echo "$HOME/.volta/bin" >> "$GITHUB_PATH"
+      - run: npm ci
+        working-directory: frontend
+      - run: npm run check
+        working-directory: frontend
+
+  frontend-build:
+    name: Frontend · Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Volta
+        run: |
+          curl -fsSL https://get.volta.sh | bash -s -- --skip-setup
+          echo "$HOME/.volta/bin" >> "$GITHUB_PATH"
+      - run: npm ci
+        working-directory: frontend
+      - run: npm run build
+        working-directory: frontend
+
+  frontend-tests:
+    name: Frontend · Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Volta
+        run: |
+          curl -fsSL https://get.volta.sh | bash -s -- --skip-setup
+          echo "$HOME/.volta/bin" >> "$GITHUB_PATH"
+      - run: npm ci
+        working-directory: frontend
+      - run: npm run test
+        working-directory: frontend
