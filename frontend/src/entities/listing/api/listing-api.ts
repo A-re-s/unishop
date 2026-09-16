@@ -122,8 +122,12 @@ export const listingApi = baseApi.injectEndpoints({
 				url: `/v1/listings/${listingId}/favorite`,
 				method: "POST",
 			}),
+			// Also invalidate LIST: a newly-favorited listing wasn't part of the
+			// favorites list result yet, so its own tag alone wouldn't be enough
+			// to make that list query refetch.
 			invalidatesTags: (_result, _error, listingId) => [
 				{ type: "Listing", id: listingId },
+				{ type: "Listing", id: "LIST" },
 			],
 		}),
 		unfavoriteListing: builder.mutation<void, string>({
@@ -133,6 +137,7 @@ export const listingApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: (_result, _error, listingId) => [
 				{ type: "Listing", id: listingId },
+				{ type: "Listing", id: "LIST" },
 			],
 		}),
 	}),

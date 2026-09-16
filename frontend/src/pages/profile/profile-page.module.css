@@ -1,3 +1,11 @@
+.header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
 .card {
 	display: flex;
 	flex-wrap: wrap;
@@ -76,6 +84,17 @@
 	margin: 0.25rem 0 0.75rem;
 }
 
+.telegramLink {
+	display: block;
+	margin: 0.25rem 0 0.75rem;
+	color: #4f46e5;
+	text-decoration: none;
+}
+
+.telegramLink:hover {
+	text-decoration: underline;
+}
+
 .editButton {
 	padding: 0.4rem 0.9rem;
 	border-radius: 0.5rem;
@@ -135,8 +154,4 @@
 
 .sectionTitle {
 	margin: 0 0 1rem;
-}
-
-.logout {
-	margin-top: 2rem;
 }

@@ -82,7 +82,10 @@ export function ProfilePage() {
 
 	return (
 		<div>
-			<h1>Профиль</h1>
+			<div className={styles.header}>
+				<h1>Профиль</h1>
+				<LogoutButton />
+			</div>
 
 			<div className={styles.card}>
 				<div className={styles.avatarWrapper}>
@@ -155,11 +158,18 @@ export function ProfilePage() {
 				) : (
 					<div>
 						<p className={styles.username}>{user.username}</p>
-						<p className={styles.telegram}>
-							{user.telegram_username
-								? `@${formatTelegramHandle(user.telegram_username)}`
-								: "Telegram не указан"}
-						</p>
+						{user.telegram_username ? (
+							<a
+								className={styles.telegramLink}
+								href={`https://t.me/${formatTelegramHandle(user.telegram_username)}`}
+								target="_blank"
+								rel="noreferrer"
+							>
+								@{formatTelegramHandle(user.telegram_username)}
+							</a>
+						) : (
+							<p className={styles.telegram}>Telegram не указан</p>
+						)}
 						<button
 							type="button"
 							className={styles.editButton}
@@ -177,10 +187,6 @@ export function ProfilePage() {
 				fixedParams={{ author_id: user.id }}
 				emptyMessage="У вас пока нет объявлений."
 			/>
-
-			<div className={styles.logout}>
-				<LogoutButton />
-			</div>
 		</div>
 	);
 }

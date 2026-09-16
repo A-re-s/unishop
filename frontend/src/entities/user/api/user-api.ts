@@ -30,10 +30,6 @@ export const userApi = baseApi.injectEndpoints({
 			query: () => ({ url: "/v1/users/me/avatar", method: "DELETE" }),
 			invalidatesTags: ["User"],
 		}),
-		logout: builder.mutation<{ status: string }, void>({
-			query: () => ({ url: "/v1/auth/logout", method: "POST" }),
-			invalidatesTags: ["User"],
-		}),
 	}),
 });
 
@@ -43,5 +39,4 @@ export const {
 	useUpdateMeMutation,
 	useUploadAvatarMutation,
 	useDeleteAvatarMutation,
-	useLogoutMutation,
 } = userApi;

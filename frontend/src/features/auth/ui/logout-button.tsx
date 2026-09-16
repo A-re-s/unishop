@@ -1,11 +1,13 @@
-import { useLogoutMutation } from "@/entities/user/api/user-api";
+import { env } from "@/shared/config/env";
+import styles from "./logout-button.module.css";
 
+// A plain link, not a fetch/mutation: the backend needs to redirect the
+// browser through Keycloak's own end-session endpoint so its SSO cookie is
+// cleared too, not just our app's session — same reasoning as LoginButton.
 export function LogoutButton() {
-	const [logout, { isLoading }] = useLogoutMutation();
-
 	return (
-		<button type="button" onClick={() => logout()} disabled={isLoading}>
+		<a className={styles.button} href={`${env.apiUrl}/v1/auth/logout`}>
 			Выйти
-		</button>
+		</a>
 	);
 }

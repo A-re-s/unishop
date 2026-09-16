@@ -7,7 +7,7 @@ import styles from "./login-button.module.css";
 export function LoginButton() {
 	return (
 		<a className={styles.button} href={`${env.apiUrl}/v1/auth/login`}>
-			Войти через Keycloak
+			Войти
 		</a>
 	);
 }
