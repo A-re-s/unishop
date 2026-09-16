@@ -1,0 +1,116 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	max-width: 640px;
+}
+
+.error {
+	color: #dc2626;
+	margin: 0;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+}
+
+.field > span {
+	font-weight: 500;
+	font-size: 0.875rem;
+	color: #374151;
+}
+
+.field input,
+.field select,
+.field textarea {
+	padding: 0.5rem 0.75rem;
+	border: 1px solid #d1d5db;
+	border-radius: 0.5rem;
+	font: inherit;
+}
+
+.field textarea {
+	resize: vertical;
+}
+
+.row {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	gap: 1rem;
+}
+
+.dropzone {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 1.5rem;
+	border: 2px dashed #d1d5db;
+	border-radius: 0.75rem;
+	color: #6b7280;
+	text-align: center;
+}
+
+.fileLabel {
+	padding: 0.4rem 0.9rem;
+	border-radius: 0.5rem;
+	background: #4f46e5;
+	color: #fff;
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.photoGrid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-top: 0.75rem;
+}
+
+.photoThumb {
+	position: relative;
+	width: 84px;
+	height: 84px;
+	border-radius: 0.5rem;
+	overflow: hidden;
+	background: #f3f4f6;
+}
+
+.photoThumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.photoThumb button {
+	position: absolute;
+	top: 0.2rem;
+	right: 0.2rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	border: none;
+	border-radius: 50%;
+	background: rgba(17, 24, 39, 0.75);
+	color: #fff;
+	cursor: pointer;
+	line-height: 1;
+}
+
+.submit {
+	align-self: flex-start;
+	padding: 0.6rem 1.5rem;
+	border: none;
+	border-radius: 0.5rem;
+	background: #4f46e5;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.submit:disabled {
+	opacity: 0.6;
+	cursor: default;
+}

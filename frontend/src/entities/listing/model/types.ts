@@ -32,3 +32,24 @@ export const LISTING_STATUS_LABELS: Record<ListingStatus, string> = {
 	reserved: "Забронировано",
 	sold: "Продано",
 };
+
+// Mirrors ALLOWED_STATUS_TRANSITIONS in backend/services/listing_service.py —
+// determines which status-change buttons the owner sees on a listing.
+export const ALLOWED_STATUS_TRANSITIONS: Record<
+	ListingStatus,
+	ListingStatus[]
+> = {
+	active: ["reserved", "sold"],
+	reserved: ["active", "sold"],
+	sold: [],
+};
+
+export const MAX_LISTING_PHOTOS = 10;
+
+export interface ListingFormValues {
+	title: string;
+	description: string;
+	price: string;
+	category_id: string;
+	condition: ListingCondition;
+}

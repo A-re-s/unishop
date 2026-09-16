@@ -1,8 +1,10 @@
+import { ListingForm } from "@/widgets/listing-form/listing-form";
+
 export function CreateListingPage() {
 	return (
 		<div>
-			<h1>Создать объявление</h1>
-			<p>Здесь появится форма создания объявления.</p>
+			<h1>Новое объявление</h1>
+			<ListingForm />
 		</div>
 	);
 }

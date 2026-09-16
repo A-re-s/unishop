@@ -1,6 +1,11 @@
 import { baseApi } from "@/shared/api/base-api";
 import type { Page } from "@/shared/api/types";
-import type { Listing, ListingStatus } from "../model/types";
+import type {
+	Listing,
+	ListingFormValues,
+	ListingPhoto,
+	ListingStatus,
+} from "../model/types";
 
 export interface ListingsQueryParams {
 	search?: string;
@@ -35,6 +40,83 @@ export const listingApi = baseApi.injectEndpoints({
 			query: (params) => ({ url: "/v1/favorites", params }),
 			providesTags: listingListTags,
 		}),
+		getListing: builder.query<Listing, string>({
+			query: (listingId) => `/v1/listings/${listingId}`,
+			providesTags: (_result, _error, listingId) => [
+				{ type: "Listing", id: listingId },
+			],
+		}),
+		createListing: builder.mutation<Listing, ListingFormValues>({
+			query: (data) => ({ url: "/v1/listings", method: "POST", body: data }),
+			invalidatesTags: [{ type: "Listing", id: "LIST" }],
+		}),
+		updateListing: builder.mutation<
+			Listing,
+			{ id: string; data: Partial<ListingFormValues> }
+		>({
+			query: ({ id, data }) => ({
+				url: `/v1/listings/${id}`,
+				method: "PATCH",
+				body: data,
+			}),
+			invalidatesTags: (_result, _error, { id }) => [
+				{ type: "Listing", id },
+				{ type: "Listing", id: "LIST" },
+			],
+		}),
+		deleteListing: builder.mutation<void, string>({
+			query: (listingId) => ({
+				url: `/v1/listings/${listingId}`,
+				method: "DELETE",
+			}),
+			invalidatesTags: (_result, _error, listingId) => [
+				{ type: "Listing", id: listingId },
+				{ type: "Listing", id: "LIST" },
+			],
+		}),
+		updateListingStatus: builder.mutation<
+			Listing,
+			{ id: string; status: ListingStatus }
+		>({
+			query: ({ id, status }) => ({
+				url: `/v1/listings/${id}/status`,
+				method: "PATCH",
+				body: { status },
+			}),
+			invalidatesTags: (_result, _error, { id }) => [
+				{ type: "Listing", id },
+				{ type: "Listing", id: "LIST" },
+			],
+		}),
+		uploadListingPhoto: builder.mutation<
+			ListingPhoto,
+			{ listingId: string; file: File }
+		>({
+			query: ({ listingId, file }) => {
+				const body = new FormData();
+				body.append("file", file);
+				return {
+					url: `/v1/listings/${listingId}/photos`,
+					method: "POST",
+					body,
+				};
+			},
+			invalidatesTags: (_result, _error, { listingId }) => [
+				{ type: "Listing", id: listingId },
+			],
+		}),
+		deleteListingPhoto: builder.mutation<
+			void,
+			{ listingId: string; photoId: string }
+		>({
+			query: ({ listingId, photoId }) => ({
+				url: `/v1/listings/${listingId}/photos/${photoId}`,
+				method: "DELETE",
+			}),
+			invalidatesTags: (_result, _error, { listingId }) => [
+				{ type: "Listing", id: listingId },
+			],
+		}),
 		favoriteListing: builder.mutation<void, string>({
 			query: (listingId) => ({
 				url: `/v1/listings/${listingId}/favorite`,
@@ -59,6 +141,13 @@ export const listingApi = baseApi.injectEndpoints({
 export const {
 	useGetListingsQuery,
 	useGetFavoritesQuery,
+	useGetListingQuery,
+	useCreateListingMutation,
+	useUpdateListingMutation,
+	useDeleteListingMutation,
+	useUpdateListingStatusMutation,
+	useUploadListingPhotoMutation,
+	useDeleteListingPhotoMutation,
 	useFavoriteListingMutation,
 	useUnfavoriteListingMutation,
 } = listingApi;
