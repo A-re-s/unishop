@@ -17,14 +17,16 @@
         "http://localhost:8000/v1/auth/callback",
         "http://localhost/api/v1/auth/callback",
         "http://127.0.0.1:8000/v1/auth/callback",
-        "http://127.0.0.1/api/v1/auth/callback"
+        "http://127.0.0.1/api/v1/auth/callback",
+        "http://kpfu.shop/api/v1/auth/callback",
+        "http://135.106.157.153/api/v1/auth/callback"
       ],
       "webOrigins": ["+"],
       "standardFlowEnabled": true,
       "directAccessGrantsEnabled": false,
       "serviceAccountsEnabled": false,
       "attributes": {
-        "post.logout.redirect.uris": "http://localhost:5173/*##http://localhost/*##http://127.0.0.1:5173/*##http://127.0.0.1/*"
+        "post.logout.redirect.uris": "http://localhost:5173/*##http://localhost/*##http://127.0.0.1:5173/*##http://127.0.0.1/*##http://kpfu.shop/*##http://135.106.157.153/*"
       },
       "protocolMappers": [
         {
