@@ -8,7 +8,13 @@ from backend.api.dependencies.db import get_uow
 from backend.db.models.listing import ListingStatus
 from backend.db.models.user import User
 from backend.db.uow import UnitOfWork
-from backend.schemas.listing import ListingCreate, ListingRead, ListingStatusUpdate, ListingUpdate
+from backend.schemas.listing import (
+    ListingCreate,
+    ListingRead,
+    ListingStatusUpdate,
+    ListingUpdate,
+    listing_to_read,
+)
 from backend.schemas.pagination import Page
 from backend.services.listing_service import (
     change_listing_status,
@@ -32,7 +38,7 @@ async def list_listings(
     page: int = Query(default=1, ge=1),
     size: int = Query(default=20, ge=1, le=100),
     uow: UnitOfWork = Depends(get_uow),
-    _: User = Depends(get_current_user),
+    user: User = Depends(get_current_user),
 ) -> Page[ListingRead]:
     items, total = await uow.listings.list(
         search=search,
@@ -44,7 +50,9 @@ async def list_listings(
         page=page,
         size=size,
     )
-    return Page(items=items, total=total, page=page, size=size)
+    favorited_ids = await uow.favorites.get_favorited_ids(user.id, [item.id for item in items])
+    read_items = [listing_to_read(item, is_favorite=item.id in favorited_ids) for item in items]
+    return Page(items=read_items, total=total, page=page, size=size)
 
 
 @router.post("", response_model=ListingRead, status_code=status.HTTP_201_CREATED)
@@ -52,17 +60,20 @@ async def create(
     data: ListingCreate,
     uow: UnitOfWork = Depends(get_uow),
     user: User = Depends(get_current_user),
-):
-    return await create_listing(uow, author_id=user.id, data=data)
+) -> ListingRead:
+    listing = await create_listing(uow, author_id=user.id, data=data)
+    return listing_to_read(listing, is_favorite=False)
 
 
 @router.get("/{listing_id}", response_model=ListingRead)
 async def get(
     listing_id: uuid.UUID,
     uow: UnitOfWork = Depends(get_uow),
-    _: User = Depends(get_current_user),
-):
-    return await get_listing_or_404(uow, listing_id)
+    user: User = Depends(get_current_user),
+) -> ListingRead:
+    listing = await get_listing_or_404(uow, listing_id)
+    is_favorite = await uow.favorites.is_favorited(user.id, listing.id)
+    return listing_to_read(listing, is_favorite=is_favorite)
 
 
 @router.patch("/{listing_id}", response_model=ListingRead)
@@ -71,8 +82,9 @@ async def update(
     data: ListingUpdate,
     uow: UnitOfWork = Depends(get_uow),
     user: User = Depends(get_current_user),
-):
-    return await update_listing(uow, listing_id=listing_id, author_id=user.id, data=data)
+) -> ListingRead:
+    listing = await update_listing(uow, listing_id=listing_id, author_id=user.id, data=data)
+    return listing_to_read(listing, is_favorite=False)
 
 
 @router.delete("/{listing_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -90,7 +102,8 @@ async def update_status(
     data: ListingStatusUpdate,
     uow: UnitOfWork = Depends(get_uow),
     user: User = Depends(get_current_user),
-):
-    return await change_listing_status(
+) -> ListingRead:
+    listing = await change_listing_status(
         uow, listing_id=listing_id, author_id=user.id, new_status=data.status
     )
+    return listing_to_read(listing, is_favorite=False)

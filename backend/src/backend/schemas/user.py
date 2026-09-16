@@ -1,6 +1,6 @@
 import uuid
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class UserRead(BaseModel):
@@ -10,3 +10,8 @@ class UserRead(BaseModel):
     username: str
     avatar_url: str | None
     telegram_username: str | None
+
+
+class UserUpdate(BaseModel):
+    username: str | None = Field(default=None, min_length=1, max_length=255)
+    telegram_username: str | None = Field(default=None, min_length=1, max_length=255)

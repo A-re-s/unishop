@@ -4,6 +4,7 @@ from typing import Literal
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from backend.db.models.favorite import Favorite
 from backend.db.models.listing import Listing, ListingStatus
 
 
@@ -21,12 +22,17 @@ class ListingRepository:
         category_id: uuid.UUID | None,
         status: ListingStatus | None,
         author_id: uuid.UUID | None,
+        favorite_of: uuid.UUID | None = None,
         sort_by: Literal["created_at", "price"],
         order: Literal["asc", "desc"],
         page: int,
         size: int,
     ) -> tuple[list[Listing], int]:
         stmt = select(Listing)
+        if favorite_of is not None:
+            stmt = stmt.join(Favorite, Favorite.listing_id == Listing.id).where(
+                Favorite.user_id == favorite_of
+            )
         if search:
             stmt = stmt.where(Listing.title.ilike(f"%{search}%"))
         if category_id is not None:

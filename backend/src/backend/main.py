@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 
-from backend.api.routers import auth, categories, health, listings
+from backend.api.routers import auth, categories, favorites, health, listings, users
 from backend.core.config import settings
 
 app = FastAPI(title=settings.app_name, debug=settings.debug, root_path=settings.api_root_path)
@@ -23,3 +23,5 @@ app.include_router(health.router)
 app.include_router(auth.router)
 app.include_router(categories.router)
 app.include_router(listings.router)
+app.include_router(favorites.router)
+app.include_router(users.router)
