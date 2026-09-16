@@ -23,6 +23,7 @@ CMD ["uv", "run", "uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", 
 FROM deps AS builder
 
 COPY src/ src/
+COPY alembic.ini ./
 RUN uv sync --locked --no-dev
 
 
@@ -33,6 +34,7 @@ WORKDIR /app
 
 COPY --from=builder /app/.venv .venv
 COPY --from=builder /app/src src
+COPY --from=builder /app/alembic.ini alembic.ini
 
 ENV PATH="/app/.venv/bin:$PATH"
 
