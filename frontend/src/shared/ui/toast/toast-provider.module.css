@@ -1,0 +1,41 @@
+.container {
+	position: fixed;
+	top: 1rem;
+	right: 1rem;
+	left: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 0.5rem;
+	z-index: 1000;
+	pointer-events: none;
+}
+
+.success,
+.error {
+	max-width: 360px;
+	padding: 0.65rem 1rem;
+	border-radius: 0.5rem;
+	color: #fff;
+	font-size: 0.875rem;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.success {
+	background: #16a34a;
+}
+
+.error {
+	background: #dc2626;
+}
+
+@media (max-width: 480px) {
+	.container {
+		align-items: stretch;
+	}
+
+	.success,
+	.error {
+		max-width: none;
+	}
+}

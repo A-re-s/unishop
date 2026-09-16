@@ -16,6 +16,7 @@ import {
 	LISTING_CONDITION_LABELS,
 	MAX_LISTING_PHOTOS,
 } from "@/entities/listing/model/types";
+import { useToast } from "@/shared/ui/toast/toast-provider";
 import styles from "./listing-form.module.css";
 
 interface StagedPhoto {
@@ -31,6 +32,7 @@ interface ListingFormProps {
 
 export function ListingForm({ listing }: ListingFormProps) {
 	const navigate = useNavigate();
+	const { showToast } = useToast();
 	const { data: categories } = useGetCategoriesQuery();
 	const [createListing, { isLoading: isCreating }] = useCreateListingMutation();
 	const [updateListing, { isLoading: isUpdating }] = useUpdateListingMutation();
@@ -86,7 +88,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 					}).unwrap();
 					setExistingPhotos((prev) => [...prev, photo]);
 				} catch {
-					setError("Не удалось загрузить одно из фото.");
+					showToast("Не удалось загрузить одно из фото.", "error");
 				}
 			}
 			setIsUploadingPhoto(false);
@@ -106,8 +108,12 @@ export function ListingForm({ listing }: ListingFormProps) {
 		if (!listing) {
 			return;
 		}
-		await deletePhoto({ listingId: listing.id, photoId }).unwrap();
-		setExistingPhotos((prev) => prev.filter((photo) => photo.id !== photoId));
+		try {
+			await deletePhoto({ listingId: listing.id, photoId }).unwrap();
+			setExistingPhotos((prev) => prev.filter((photo) => photo.id !== photoId));
+		} catch {
+			showToast("Не удалось удалить фото.", "error");
+		}
 	}
 
 	function handleRemoveStagedPhoto(id: string) {
@@ -143,6 +149,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 		try {
 			if (listing) {
 				await updateListing({ id: listing.id, data: values }).unwrap();
+				showToast("Изменения сохранены");
 				navigate(`/listings/${listing.id}`);
 			} else {
 				const created = await createListing(values).unwrap();
@@ -154,8 +161,10 @@ export function ListingForm({ listing }: ListingFormProps) {
 						}).unwrap();
 					} catch {
 						// Listing was created successfully — a failed photo isn't fatal.
+						showToast("Не удалось загрузить одно из фото.", "error");
 					}
 				}
+				showToast("Объявление опубликовано");
 				navigate(`/listings/${created.id}`);
 			}
 		} catch {

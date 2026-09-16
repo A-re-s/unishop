@@ -7,6 +7,7 @@ import { HomePage } from "@/pages/home/home-page";
 import { ListingDetailPage } from "@/pages/listing-detail/listing-detail-page";
 import { LoginPage } from "@/pages/login/login-page";
 import { ProfilePage } from "@/pages/profile/profile-page";
+import { UserProfilePage } from "@/pages/user-profile/user-profile-page";
 import { Layout } from "@/widgets/layout/layout";
 
 export const router = createBrowserRouter([
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
 			{ path: "/favorites", element: <FavoritesPage /> },
 			{ path: "/listings/create", element: <CreateListingPage /> },
 			{ path: "/profile", element: <ProfilePage /> },
+			{ path: "/users/:userId", element: <UserProfilePage /> },
 			{ path: "*", element: <Navigate to="/" replace /> },
 		],
 	},

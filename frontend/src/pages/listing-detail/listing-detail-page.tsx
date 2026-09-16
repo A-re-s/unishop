@@ -13,6 +13,8 @@ import {
 	LISTING_STATUS_LABELS,
 } from "@/entities/listing/model/types";
 import { useGetMeQuery, useGetUserQuery } from "@/entities/user/api/user-api";
+import { formatTelegramHandle } from "@/entities/user/model/format-telegram-handle";
+import { useToast } from "@/shared/ui/toast/toast-provider";
 import styles from "./listing-detail-page.module.css";
 
 const priceFormatter = new Intl.NumberFormat("ru-RU", {
@@ -30,6 +32,7 @@ const dateFormatter = new Intl.DateTimeFormat("ru-RU", {
 export function ListingDetailPage() {
 	const { listingId = "" } = useParams();
 	const navigate = useNavigate();
+	const { showToast } = useToast();
 	const [activePhoto, setActivePhoto] = useState(0);
 
 	const { data: listing, isLoading } = useGetListingQuery(listingId, {
@@ -65,15 +68,25 @@ export function ListingDetailPage() {
 		if (!window.confirm("Удалить объявление? Это действие необратимо.")) {
 			return;
 		}
-		await deleteListing(listing.id).unwrap();
-		navigate("/");
+		try {
+			await deleteListing(listing.id).unwrap();
+			showToast("Объявление удалено");
+			navigate("/");
+		} catch {
+			showToast("Не удалось удалить объявление", "error");
+		}
 	}
 
 	async function handleStatusChange(status: ListingStatus) {
 		if (!listing) {
 			return;
 		}
-		await updateStatus({ id: listing.id, status }).unwrap();
+		try {
+			await updateStatus({ id: listing.id, status }).unwrap();
+			showToast("Статус обновлён");
+		} catch {
+			showToast("Не удалось изменить статус", "error");
+		}
 	}
 
 	return (
@@ -134,15 +147,20 @@ export function ListingDetailPage() {
 
 				<div className={styles.author}>
 					<p className={styles.authorLabel}>Продавец</p>
-					<p className={styles.authorName}>{author?.username ?? "…"}</p>
+					<Link
+						to={`/users/${listing.author_id}`}
+						className={styles.authorName}
+					>
+						{author?.username ?? "…"}
+					</Link>
 					{author?.telegram_username && (
 						<a
 							className={styles.telegramLink}
-							href={`https://t.me/${author.telegram_username}`}
+							href={`https://t.me/${formatTelegramHandle(author.telegram_username)}`}
 							target="_blank"
 							rel="noreferrer"
 						>
-							@{author.telegram_username}
+							@{formatTelegramHandle(author.telegram_username)}
 						</a>
 					)}
 				</div>

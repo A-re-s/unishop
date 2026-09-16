@@ -1,0 +1,53 @@
+.card {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1.25rem;
+	margin: 1rem 0 2rem;
+	padding: 1.25rem;
+	border: 1px solid #e5e7eb;
+	border-radius: 0.75rem;
+	background: #fff;
+}
+
+.avatar {
+	width: 72px;
+	height: 72px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.avatarPlaceholder {
+	width: 72px;
+	height: 72px;
+	border-radius: 50%;
+	background: #eef2ff;
+	color: #4f46e5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.75rem;
+	font-weight: 700;
+}
+
+.username {
+	font-weight: 700;
+	font-size: 1.1rem;
+	margin: 0;
+}
+
+.telegram {
+	color: #6b7280;
+	margin: 0.25rem 0 0;
+}
+
+.telegramLink {
+	display: inline-block;
+	margin-top: 0.25rem;
+	color: #4f46e5;
+	text-decoration: none;
+}
+
+.sectionTitle {
+	margin: 0 0 1rem;
+}

@@ -5,6 +5,7 @@ import {
 } from "@/entities/listing/api/listing-api";
 import type { Listing } from "@/entities/listing/model/types";
 import { LISTING_STATUS_LABELS } from "@/entities/listing/model/types";
+import { useToast } from "@/shared/ui/toast/toast-provider";
 import styles from "./listing-card.module.css";
 
 const priceFormatter = new Intl.NumberFormat("ru-RU", {
@@ -27,13 +28,18 @@ export function ListingCard({
 	const [favorite, { isLoading: isFavoriting }] = useFavoriteListingMutation();
 	const [unfavorite, { isLoading: isUnfavoriting }] =
 		useUnfavoriteListingMutation();
+	const { showToast } = useToast();
 
-	const handleToggleFavorite = (event: React.MouseEvent) => {
+	const handleToggleFavorite = async (event: React.MouseEvent) => {
 		event.preventDefault();
-		if (listing.is_favorite) {
-			unfavorite(listing.id);
-		} else {
-			favorite(listing.id);
+		try {
+			if (listing.is_favorite) {
+				await unfavorite(listing.id).unwrap();
+			} else {
+				await favorite(listing.id).unwrap();
+			}
+		} catch {
+			showToast("Не удалось обновить избранное", "error");
 		}
 	};
 
