@@ -18,6 +18,11 @@ CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 # --- build: compiles the production static bundle ---
 FROM deps AS build
 
+# Vite bakes env vars into the bundle at build time, not runtime — so this
+# has to be a build arg, unlike the backend's plain env vars.
+ARG VITE_API_URL=/api
+ENV VITE_API_URL=$VITE_API_URL
+
 COPY index.html vite.config.ts tsconfig.json tsconfig.app.json tsconfig.node.json ./
 COPY public/ public/
 COPY src/ src/

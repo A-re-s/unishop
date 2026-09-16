@@ -116,6 +116,10 @@ services:
     build:
       context: ./frontend
       target: runtime
+      args:
+        # Same origin through nginx in prod — no CORS, no cross-container
+        # hostname games like Keycloak needed.
+        VITE_API_URL: /api
 
   nginx:
     image: nginx:1.27-alpine
