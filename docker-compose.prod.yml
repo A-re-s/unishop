@@ -98,10 +98,6 @@ services:
       MINIO_PORT: "9000"
       KEYCLOAK_ISSUER: http://keycloak:8080/realms/unishop
       API_ROOT_PATH: /api
-      SESSION_COOKIE_SECURE: "true"
-      # MinIO isn't published externally here (like Postgres/Redis) — photos
-      # are served through nginx's /media/ proxy instead.
-      PHOTOS_PUBLIC_BASE_URL: http://localhost/media
     depends_on:
       postgres:
         condition: service_healthy
