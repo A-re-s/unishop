@@ -5,6 +5,7 @@ import {
 	useContext,
 	useState,
 } from "react";
+import { generateId } from "@/shared/lib/generate-id";
 import styles from "./toast-provider.module.css";
 
 type ToastType = "success" | "error";
@@ -28,7 +29,7 @@ export function ToastProvider({ children }: PropsWithChildren) {
 
 	const showToast = useCallback(
 		(message: string, type: ToastType = "success") => {
-			const id = crypto.randomUUID();
+			const id = generateId();
 			setToasts((prev) => [...prev, { id, message, type }]);
 			setTimeout(() => {
 				setToasts((prev) => prev.filter((toast) => toast.id !== id));
