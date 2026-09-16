@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 
-from backend.api.routers import auth, health
+from backend.api.routers import auth, categories, health, listings
 from backend.core.config import settings
 
 app = FastAPI(title=settings.app_name, debug=settings.debug, root_path=settings.api_root_path)
@@ -21,3 +21,5 @@ app.add_middleware(SessionMiddleware, secret_key=settings.oauth_state_secret)
 
 app.include_router(health.router)
 app.include_router(auth.router)
+app.include_router(categories.router)
+app.include_router(listings.router)
