@@ -50,6 +50,14 @@ migrate:
 migrate-down:
     cd backend && uv run alembic downgrade -1
 
+# Apply migrations on the prod stack (Postgres isn't reachable from the host there)
+migrate-prod:
+    docker compose -f docker-compose.prod.yml exec backend alembic upgrade head
+
+# Revert the last migration on the prod stack
+migrate-down-prod:
+    docker compose -f docker-compose.prod.yml exec backend alembic downgrade -1
+
 # Generate a new migration from model changes
 makemigrations message:
     cd backend && uv run alembic revision --autogenerate -m "{{ message }}"

@@ -115,7 +115,7 @@ just up-prod
    PHOTOS_PUBLIC_BASE_URL=http://<host>/media
    ```
 
-2. `just up-prod`, затем один раз `just migrate` (миграции не накатываются автоматически — как и в dev).
+2. `just up-prod`, затем один раз `just migrate-prod` (миграции не накатываются автоматически — как и в dev; на проде именно `migrate-prod`, а не `migrate` — Postgres там наружу не публикуется, `migrate` пытается достучаться до него с хоста напрямую и не найдёт).
 
 3. Разрешить в Keycloak колбэк на новый адрес — этого нельзя сделать заранее, домен/IP неизвестен на этапе сборки образа. Один раз через админку (`http://<host>:8080` → realm `unishop` → client `unishop-backend`):
    - **Valid redirect URIs** — добавить `http://<host>/api/v1/auth/callback`;
@@ -135,7 +135,8 @@ just up-prod
 | `just format` / `just format-check` | форматирование |
 | `just test` | тесты бэкенда (pytest) и фронтенда (Vitest) |
 | `just makemigrations "message"` | сгенерировать Alembic-миграцию из изменений моделей |
-| `just migrate` / `just migrate-down` | применить / откатить миграции |
+| `just migrate` / `just migrate-down` | применить / откатить миграции (dev) |
+| `just migrate-prod` / `just migrate-down-prod` | то же самое, но на прод-стеке (`docker-compose.prod.yml`) |
 | `just precommit-install` | поставить git-хуки (один раз после клонирования) |
 | `just precommit` | прогнать все pre-commit хуки вручную |
 | `just logs` / `just logs-backend` / `just logs-frontend` | логи контейнеров |
