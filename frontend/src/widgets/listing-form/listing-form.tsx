@@ -16,6 +16,7 @@ import {
 	LISTING_CONDITION_LABELS,
 	MAX_LISTING_PHOTOS,
 } from "@/entities/listing/model/types";
+import { generateId } from "@/shared/lib/generate-id";
 import { useToast } from "@/shared/ui/toast/toast-provider";
 import styles from "./listing-form.module.css";
 
@@ -96,7 +97,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 			setStagedPhotos((prev) => [
 				...prev,
 				...toAdd.map((file) => ({
-					id: crypto.randomUUID(),
+					id: generateId(),
 					file,
 					previewUrl: URL.createObjectURL(file),
 				})),
