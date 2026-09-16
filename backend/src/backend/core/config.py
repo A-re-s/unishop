@@ -82,5 +82,11 @@ class Settings(BaseSettings):
         scheme = "https" if self.minio_use_ssl else "http"
         return f"{scheme}://{self.minio_host}:{self.minio_port}"
 
+    # Base URL the *browser* uses to fetch uploaded photos directly (the
+    # bucket is public-read). Dev: MinIO's own host-published port. Prod: set
+    # via env to nginx's /media/ proxy (e.g. http://localhost/media) — MinIO
+    # itself isn't published externally there, same as Postgres/Redis.
+    photos_public_base_url: str = "http://localhost:9000/unishop"
+
 
 settings = Settings()

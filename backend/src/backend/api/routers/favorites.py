@@ -38,8 +38,12 @@ async def list_favorites(
         page=page,
         size=size,
     )
+    photos_by_listing = await uow.listing_photos.list_for_listings([item.id for item in items])
     # Every item here is, by definition, one of the user's favorites.
-    read_items = [listing_to_read(listing, is_favorite=True) for listing in items]
+    read_items = [
+        listing_to_read(listing, is_favorite=True, photos=photos_by_listing.get(listing.id, []))
+        for listing in items
+    ]
     return Page(items=read_items, total=total, page=page, size=size)
 
 

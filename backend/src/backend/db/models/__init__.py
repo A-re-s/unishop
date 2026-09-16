@@ -3,6 +3,7 @@
 from backend.db.models.category import Category
 from backend.db.models.favorite import Favorite
 from backend.db.models.listing import Listing
+from backend.db.models.listing_photo import ListingPhoto
 from backend.db.models.user import User
 
-__all__ = ["Category", "Favorite", "Listing", "User"]
+__all__ = ["Category", "Favorite", "Listing", "ListingPhoto", "User"]

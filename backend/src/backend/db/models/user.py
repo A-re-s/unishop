@@ -16,7 +16,10 @@ class User(Base):
     keycloak_sub: Mapped[str] = mapped_column(String(255), unique=True, index=True)
 
     username: Mapped[str] = mapped_column(String(255))
-    avatar_url: Mapped[str | None] = mapped_column(String(1024), default=None)
+    # MinIO object key, not a URL — the full URL is computed at serialization
+    # time (see schemas.user.user_to_read), so it stays correct even if
+    # photos_public_base_url changes.
+    avatar_object_key: Mapped[str | None] = mapped_column(String(1024), default=None)
     telegram_username: Mapped[str | None] = mapped_column(String(255), default=None)
 
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

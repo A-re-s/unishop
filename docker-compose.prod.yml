@@ -76,7 +76,8 @@ services:
     entrypoint: >
       /bin/sh -c "
       mc alias set local http://minio:9000 $$MINIO_ROOT_USER $$MINIO_ROOT_PASSWORD &&
-      mc mb --ignore-existing local/$$MINIO_BUCKET
+      mc mb --ignore-existing local/$$MINIO_BUCKET &&
+      mc anonymous set download local/$$MINIO_BUCKET
       "
 
   backend:
@@ -98,6 +99,9 @@ services:
       KEYCLOAK_ISSUER: http://keycloak:8080/realms/unishop
       API_ROOT_PATH: /api
       SESSION_COOKIE_SECURE: "true"
+      # MinIO isn't published externally here (like Postgres/Redis) — photos
+      # are served through nginx's /media/ proxy instead.
+      PHOTOS_PUBLIC_BASE_URL: http://localhost/media
     depends_on:
       postgres:
         condition: service_healthy

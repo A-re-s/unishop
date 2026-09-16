@@ -8,7 +8,7 @@ from backend.core.security.oauth import oauth
 from backend.core.security.sessions import create_session, delete_session
 from backend.db.models.user import User
 from backend.db.uow import UnitOfWork
-from backend.schemas.user import UserRead
+from backend.schemas.user import UserRead, user_to_read
 from backend.services.auth_service import get_or_create_user
 
 router = APIRouter(prefix="/v1/auth", tags=["auth"])
@@ -47,8 +47,8 @@ async def callback(request: Request, uow: UnitOfWork = Depends(get_uow)) -> Redi
 
 
 @router.get("/me", response_model=UserRead)
-async def me(user: User = Depends(get_current_user)) -> User:
-    return user
+async def me(user: User = Depends(get_current_user)) -> UserRead:
+    return user_to_read(user)
 
 
 @router.post("/logout")

@@ -4,7 +4,9 @@ from decimal import Decimal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from backend.core.storage import photo_url
 from backend.db.models.listing import Listing, ListingCondition, ListingStatus
+from backend.db.models.listing_photo import ListingPhoto
 
 
 class ListingCreate(BaseModel):
@@ -27,6 +29,15 @@ class ListingStatusUpdate(BaseModel):
     status: ListingStatus
 
 
+class ListingPhotoRead(BaseModel):
+    id: uuid.UUID
+    url: str
+
+
+def listing_photo_to_read(photo: ListingPhoto) -> ListingPhotoRead:
+    return ListingPhotoRead(id=photo.id, url=photo_url(photo.object_key))
+
+
 class ListingRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
@@ -41,9 +52,12 @@ class ListingRead(BaseModel):
     created_at: datetime
     updated_at: datetime
     is_favorite: bool
+    photos: list[ListingPhotoRead]
 
 
-def listing_to_read(listing: Listing, *, is_favorite: bool) -> ListingRead:
+def listing_to_read(
+    listing: Listing, *, is_favorite: bool, photos: list[ListingPhoto]
+) -> ListingRead:
     return ListingRead(
         id=listing.id,
         title=listing.title,
@@ -56,4 +70,5 @@ def listing_to_read(listing: Listing, *, is_favorite: bool) -> ListingRead:
         created_at=listing.created_at,
         updated_at=listing.updated_at,
         is_favorite=is_favorite,
+        photos=[listing_photo_to_read(photo) for photo in photos],
     )

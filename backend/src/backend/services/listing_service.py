@@ -2,6 +2,7 @@ import uuid
 
 from fastapi import HTTPException, status
 
+from backend.core.storage import delete_photo
 from backend.db.models.listing import Listing, ListingStatus
 from backend.db.uow import UnitOfWork
 from backend.schemas.listing import ListingCreate, ListingUpdate
@@ -65,8 +66,16 @@ async def update_listing(
 
 async def delete_listing(uow: UnitOfWork, *, listing_id: uuid.UUID, author_id: uuid.UUID) -> None:
     listing = await get_owned_listing_or_404(uow, listing_id, author_id)
+
+    # The Listing.photos relationship (cascade="all, delete-orphan") deletes
+    # the listing_photos rows too — we only need to clean up MinIO ourselves.
+    photos = await uow.listing_photos.list_for_listing(listing_id)
+
     await uow.listings.delete(listing)
     await uow.commit()
+
+    for photo in photos:
+        await delete_photo(photo.object_key)
 
 
 async def change_listing_status(

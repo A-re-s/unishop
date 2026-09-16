@@ -2,12 +2,16 @@ import enum
 import uuid
 from datetime import datetime
 from decimal import Decimal
+from typing import TYPE_CHECKING
 
 from sqlalchemy import DateTime, ForeignKey, Numeric, String, Text, func
 from sqlalchemy import Enum as SAEnum
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.db.base import Base
+
+if TYPE_CHECKING:
+    from backend.db.models.listing_photo import ListingPhoto
 
 
 class ListingCondition(enum.StrEnum):
@@ -43,3 +47,8 @@ class Listing(Base):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
+
+    # Lets SQLAlchemy's unit-of-work know photos must be deleted before the
+    # listing itself — without this it doesn't know the two pending deletes
+    # are related and can order the listing's DELETE first, violating the FK.
+    photos: Mapped[list["ListingPhoto"]] = relationship(cascade="all, delete-orphan")

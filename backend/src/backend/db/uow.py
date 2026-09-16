@@ -5,6 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 from backend.db.base import Base
 from backend.repositories.category_repository import CategoryRepository
 from backend.repositories.favorite_repository import FavoriteRepository
+from backend.repositories.listing_photo_repository import ListingPhotoRepository
 from backend.repositories.listing_repository import ListingRepository
 from backend.repositories.user_repository import UserRepository
 
@@ -20,6 +21,7 @@ class UnitOfWork:
         self.categories = CategoryRepository(self._session)
         self.listings = ListingRepository(self._session)
         self.favorites = FavoriteRepository(self._session)
+        self.listing_photos = ListingPhotoRepository(self._session)
         return self
 
     async def __aexit__(

@@ -50,8 +50,15 @@ async def list_listings(
         page=page,
         size=size,
     )
-    favorited_ids = await uow.favorites.get_favorited_ids(user.id, [item.id for item in items])
-    read_items = [listing_to_read(item, is_favorite=item.id in favorited_ids) for item in items]
+    listing_ids = [item.id for item in items]
+    favorited_ids = await uow.favorites.get_favorited_ids(user.id, listing_ids)
+    photos_by_listing = await uow.listing_photos.list_for_listings(listing_ids)
+    read_items = [
+        listing_to_read(
+            item, is_favorite=item.id in favorited_ids, photos=photos_by_listing.get(item.id, [])
+        )
+        for item in items
+    ]
     return Page(items=read_items, total=total, page=page, size=size)
 
 
@@ -62,7 +69,7 @@ async def create(
     user: User = Depends(get_current_user),
 ) -> ListingRead:
     listing = await create_listing(uow, author_id=user.id, data=data)
-    return listing_to_read(listing, is_favorite=False)
+    return listing_to_read(listing, is_favorite=False, photos=[])
 
 
 @router.get("/{listing_id}", response_model=ListingRead)
@@ -73,7 +80,8 @@ async def get(
 ) -> ListingRead:
     listing = await get_listing_or_404(uow, listing_id)
     is_favorite = await uow.favorites.is_favorited(user.id, listing.id)
-    return listing_to_read(listing, is_favorite=is_favorite)
+    photos = await uow.listing_photos.list_for_listing(listing.id)
+    return listing_to_read(listing, is_favorite=is_favorite, photos=photos)
 
 
 @router.patch("/{listing_id}", response_model=ListingRead)
@@ -84,7 +92,8 @@ async def update(
     user: User = Depends(get_current_user),
 ) -> ListingRead:
     listing = await update_listing(uow, listing_id=listing_id, author_id=user.id, data=data)
-    return listing_to_read(listing, is_favorite=False)
+    photos = await uow.listing_photos.list_for_listing(listing.id)
+    return listing_to_read(listing, is_favorite=False, photos=photos)
 
 
 @router.delete("/{listing_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -106,4 +115,5 @@ async def update_status(
     listing = await change_listing_status(
         uow, listing_id=listing_id, author_id=user.id, new_status=data.status
     )
-    return listing_to_read(listing, is_favorite=False)
+    photos = await uow.listing_photos.list_for_listing(listing.id)
+    return listing_to_read(listing, is_favorite=False, photos=photos)
