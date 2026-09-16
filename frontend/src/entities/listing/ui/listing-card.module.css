@@ -1,0 +1,94 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #e5e7eb;
+	border-radius: 0.75rem;
+	overflow: hidden;
+	background: #fff;
+	text-decoration: none;
+	color: inherit;
+	transition: box-shadow 0.15s ease;
+}
+
+.card:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.imageWrapper {
+	position: relative;
+	aspect-ratio: 4 / 3;
+	background: #f3f4f6;
+}
+
+.image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.imagePlaceholder {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #9ca3af;
+	font-size: 0.875rem;
+}
+
+.statusBadge {
+	position: absolute;
+	top: 0.5rem;
+	left: 0.5rem;
+	background: rgba(17, 24, 39, 0.85);
+	color: #fff;
+	font-size: 0.75rem;
+	padding: 0.2rem 0.5rem;
+	border-radius: 0.375rem;
+}
+
+.favoriteButton {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	width: 2rem;
+	height: 2rem;
+	border: none;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.9);
+	font-size: 1.1rem;
+	line-height: 1;
+	cursor: pointer;
+	color: #dc2626;
+}
+
+.favoriteButton:disabled {
+	opacity: 0.6;
+	cursor: default;
+}
+
+.body {
+	padding: 0.75rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.price {
+	font-weight: 700;
+	margin: 0;
+}
+
+.title {
+	margin: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.category {
+	margin: 0;
+	color: #6b7280;
+	font-size: 0.8rem;
+}

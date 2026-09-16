@@ -1,8 +1,14 @@
+import { useGetFavoritesQuery } from "@/entities/listing/api/listing-api";
+import { ListingFeed } from "@/widgets/listing-feed/listing-feed";
+
 export function FavoritesPage() {
 	return (
 		<div>
 			<h1>Избранное</h1>
-			<p>Здесь появятся объявления, добавленные в избранное.</p>
+			<ListingFeed
+				useListingsQuery={useGetFavoritesQuery}
+				emptyMessage="Вы пока ничего не добавили в избранное."
+			/>
 		</div>
 	);
 }

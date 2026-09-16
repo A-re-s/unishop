@@ -54,6 +54,10 @@ migrate-down:
 makemigrations message:
     cd backend && uv run alembic revision --autogenerate -m "{{ message }}"
 
+# Fill the dev DB with test Keycloak users and listings (requires `just up`)
+seed:
+    python3 scripts/seed.py
+
 # --- Tests ---
 
 # Run backend tests
