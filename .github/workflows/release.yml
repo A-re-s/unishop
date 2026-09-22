@@ -26,6 +26,11 @@ jobs:
         with:
           python-version: "3.12"
 
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "backend/uv.lock"
+
       - name: Install Commitizen
         run: pip install commitizen
 
@@ -50,6 +55,18 @@ jobs:
           fi
           echo "released=true" >> "$GITHUB_OUTPUT"
           echo "version=$(cz version --project)" >> "$GITHUB_OUTPUT"
+
+      - name: Sync backend/uv.lock with bumped version
+        if: steps.bump.outputs.released == 'true'
+        run: |
+          cd backend
+          uv lock
+          cd ..
+          if ! git diff --quiet -- backend/uv.lock; then
+            git add backend/uv.lock
+            git commit --amend --no-edit
+            git tag -f "v${{ steps.bump.outputs.version }}" HEAD
+          fi
 
       - name: Push version bump and tag
         if: steps.bump.outputs.released == 'true'
