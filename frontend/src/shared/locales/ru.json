@@ -1,0 +1,125 @@
+{
+	"common": {
+		"loading": "Загрузка...",
+		"cancel": "Отмена",
+		"save": "Сохранить",
+		"delete": "Удалить",
+		"edit": "Редактировать",
+		"noPhoto": "Нет фото"
+	},
+	"nav": {
+		"recommendations": "Рекомендации",
+		"favorites": "Избранное",
+		"createListing": "+",
+		"profile": "Профиль"
+	},
+	"auth": {
+		"login": "Войти",
+		"logout": "Выйти"
+	},
+	"loginPage": {
+		"title": "Unishop",
+		"subtitle": "Доска объявлений университета"
+	},
+	"homePage": {
+		"title": "Рекомендации",
+		"empty": "Пока нет активных объявлений."
+	},
+	"favoritesPage": {
+		"title": "Избранное",
+		"empty": "Вы пока ничего не добавили в избранное."
+	},
+	"listingFeed": {
+		"defaultEmpty": "Ничего не найдено.",
+		"searchPlaceholder": "Поиск по названию",
+		"allCategories": "Все категории",
+		"anyStatus": "Любой статус",
+		"sort": {
+			"createdDesc": "Сначала новые",
+			"createdAsc": "Сначала старые",
+			"priceAsc": "Сначала дешевле",
+			"priceDesc": "Сначала дороже"
+		},
+		"prev": "Назад",
+		"next": "Вперёд",
+		"pageOf": "Стр. {{page}} из {{total}}"
+	},
+	"listingCard": {
+		"addFavorite": "Добавить в избранное",
+		"removeFavorite": "Убрать из избранного",
+		"updateFavoriteError": "Не удалось обновить избранное"
+	},
+	"listingCondition": {
+		"new": "Новое",
+		"used": "Б/у"
+	},
+	"listingStatus": {
+		"active": "Активно",
+		"reserved": "Забронировано",
+		"sold": "Продано"
+	},
+	"listingDetail": {
+		"seller": "Продавец",
+		"category": "Категория",
+		"condition": "Состояние",
+		"createdAt": "Дата размещения",
+		"changeStatus": "Сменить статус:",
+		"deleteConfirm": "Удалить объявление? Это действие необратимо.",
+		"deletedToast": "Объявление удалено",
+		"deleteErrorToast": "Не удалось удалить объявление",
+		"statusUpdatedToast": "Статус обновлён",
+		"statusErrorToast": "Не удалось изменить статус",
+		"notFound": "Объявление не найдено."
+	},
+	"listingForm": {
+		"createTitle": "Новое объявление",
+		"editTitle": "Редактирование объявления",
+		"fields": {
+			"title": "Название",
+			"description": "Описание",
+			"price": "Цена, ₽",
+			"category": "Категория",
+			"categoryPlaceholder": "Выберите категорию",
+			"condition": "Состояние"
+		},
+		"photos": {
+			"label": "Фото ({{count}}/{{max}})",
+			"dropHint": "Перетащите фото сюда или",
+			"chooseFiles": "выберите файлы",
+			"remove": "Удалить фото"
+		},
+		"submitCreate": "Опубликовать объявление",
+		"submitEdit": "Сохранить изменения",
+		"submitError": "Не удалось сохранить объявление. Проверьте поля и попробуйте снова.",
+		"photoUploadError": "Не удалось загрузить одно из фото.",
+		"photoDeleteError": "Не удалось удалить фото.",
+		"createdToast": "Объявление опубликовано",
+		"updatedToast": "Изменения сохранены"
+	},
+	"profilePage": {
+		"title": "Профиль",
+		"changePhoto": "Изменить фото",
+		"uploading": "Загрузка...",
+		"removePhoto": "Удалить фото",
+		"usernameLabel": "Имя пользователя",
+		"telegramLabel": "Telegram",
+		"editProfile": "Редактировать профиль",
+		"telegramNotSet": "Telegram не указан",
+		"myListings": "Мои объявления",
+		"myListingsEmpty": "У вас пока нет объявлений.",
+		"language": "Язык",
+		"updatedToast": "Профиль обновлён",
+		"updateErrorToast": "Не удалось сохранить профиль",
+		"avatarUpdatedToast": "Фото профиля обновлено",
+		"avatarErrorToast": "Не удалось загрузить фото",
+		"avatarRemovedToast": "Фото профиля удалено",
+		"avatarRemoveErrorToast": "Не удалось удалить фото"
+	},
+	"userProfilePage": {
+		"title": "Профиль пользователя",
+		"telegramNotSet": "Telegram не указан",
+		"listingsTitle": "Объявления пользователя",
+		"listingsEmpty": "У пользователя пока нет активных объявлений.",
+		"notFound": "Пользователь не найден."
+	}
+}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useGetListingsQuery } from "@/entities/listing/api/listing-api";
 import {
 	useDeleteAvatarMutation,
@@ -8,11 +9,13 @@ import {
 } from "@/entities/user/api/user-api";
 import { formatTelegramHandle } from "@/entities/user/model/format-telegram-handle";
 import { LogoutButton } from "@/features/auth/ui/logout-button";
+import { LanguageSwitcher } from "@/features/locale/ui/language-switcher";
 import { useToast } from "@/shared/ui/toast/toast-provider";
 import { ListingFeed } from "@/widgets/listing-feed/listing-feed";
 import styles from "./profile-page.module.css";
 
 export function ProfilePage() {
+	const { t } = useTranslation();
 	const { data: user } = useGetMeQuery();
 	const { showToast } = useToast();
 
@@ -44,10 +47,10 @@ export function ProfilePage() {
 				username: username.trim(),
 				telegram_username: formatTelegramHandle(telegramUsername),
 			}).unwrap();
-			showToast("Профиль обновлён");
+			showToast(t("profilePage.updatedToast"));
 			setIsEditing(false);
 		} catch {
-			showToast("Не удалось сохранить профиль", "error");
+			showToast(t("profilePage.updateErrorToast"), "error");
 		}
 	}
 
@@ -61,30 +64,37 @@ export function ProfilePage() {
 		}
 		try {
 			await uploadAvatar(file).unwrap();
-			showToast("Фото профиля обновлено");
+			showToast(t("profilePage.avatarUpdatedToast"));
 		} catch {
-			showToast("Не удалось загрузить фото", "error");
+			showToast(t("profilePage.avatarErrorToast"), "error");
 		}
 	}
 
 	async function handleAvatarDelete() {
 		try {
 			await deleteAvatar().unwrap();
-			showToast("Фото профиля удалено");
+			showToast(t("profilePage.avatarRemovedToast"));
 		} catch {
-			showToast("Не удалось удалить фото", "error");
+			showToast(t("profilePage.avatarRemoveErrorToast"), "error");
 		}
 	}
 
 	if (!user) {
-		return <p>Загрузка...</p>;
+		return <p>{t("common.loading")}</p>;
 	}
 
 	return (
 		<div>
 			<div className={styles.header}>
-				<h1>Профиль</h1>
+				<h1>{t("profilePage.title")}</h1>
 				<LogoutButton />
+			</div>
+
+			<div className={styles.settingsRow}>
+				<span className={styles.settingsLabel}>
+					{t("profilePage.language")}
+				</span>
+				<LanguageSwitcher />
 			</div>
 
 			<div className={styles.card}>
@@ -102,7 +112,9 @@ export function ProfilePage() {
 					)}
 					<div className={styles.avatarActions}>
 						<label className={styles.avatarButton}>
-							{isUploadingAvatar ? "Загрузка..." : "Изменить фото"}
+							{isUploadingAvatar
+								? t("profilePage.uploading")
+								: t("profilePage.changePhoto")}
 							<input
 								type="file"
 								accept="image/*"
@@ -118,7 +130,7 @@ export function ProfilePage() {
 								onClick={handleAvatarDelete}
 								disabled={isDeletingAvatar}
 							>
-								Удалить фото
+								{t("profilePage.removePhoto")}
 							</button>
 						)}
 					</div>
@@ -127,7 +139,7 @@ export function ProfilePage() {
 				{isEditing ? (
 					<form className={styles.editForm} onSubmit={handleSave}>
 						<label className={styles.field}>
-							<span>Имя пользователя</span>
+							<span>{t("profilePage.usernameLabel")}</span>
 							<input
 								type="text"
 								value={username}
@@ -138,7 +150,7 @@ export function ProfilePage() {
 							/>
 						</label>
 						<label className={styles.field}>
-							<span>Telegram</span>
+							<span>{t("profilePage.telegramLabel")}</span>
 							<input
 								type="text"
 								value={telegramUsername}
@@ -148,10 +160,10 @@ export function ProfilePage() {
 						</label>
 						<div className={styles.editActions}>
 							<button type="submit" disabled={isSaving}>
-								Сохранить
+								{t("common.save")}
 							</button>
 							<button type="button" onClick={() => setIsEditing(false)}>
-								Отмена
+								{t("common.cancel")}
 							</button>
 						</div>
 					</form>
@@ -168,24 +180,26 @@ export function ProfilePage() {
 								@{formatTelegramHandle(user.telegram_username)}
 							</a>
 						) : (
-							<p className={styles.telegram}>Telegram не указан</p>
+							<p className={styles.telegram}>
+								{t("profilePage.telegramNotSet")}
+							</p>
 						)}
 						<button
 							type="button"
 							className={styles.editButton}
 							onClick={startEditing}
 						>
-							Редактировать профиль
+							{t("profilePage.editProfile")}
 						</button>
 					</div>
 				)}
 			</div>
 
-			<h2 className={styles.sectionTitle}>Мои объявления</h2>
+			<h2 className={styles.sectionTitle}>{t("profilePage.myListings")}</h2>
 			<ListingFeed
 				useListingsQuery={useGetListingsQuery}
 				fixedParams={{ author_id: user.id }}
-				emptyMessage="У вас пока нет объявлений."
+				emptyMessage={t("profilePage.myListingsEmpty")}
 			/>
 		</div>
 	);

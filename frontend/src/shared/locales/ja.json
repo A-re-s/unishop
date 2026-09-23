@@ -1,0 +1,125 @@
+{
+	"common": {
+		"loading": "読み込み中...",
+		"cancel": "キャンセル",
+		"save": "保存",
+		"delete": "削除",
+		"edit": "編集",
+		"noPhoto": "写真なし"
+	},
+	"nav": {
+		"recommendations": "おすすめ",
+		"favorites": "お気に入り",
+		"createListing": "+",
+		"profile": "プロフィール"
+	},
+	"auth": {
+		"login": "ログイン",
+		"logout": "ログアウト"
+	},
+	"loginPage": {
+		"title": "Unishop",
+		"subtitle": "大学のクラシファイド掲示板"
+	},
+	"homePage": {
+		"title": "おすすめ",
+		"empty": "現在、出品中の商品はありません。"
+	},
+	"favoritesPage": {
+		"title": "お気に入り",
+		"empty": "まだお気に入りに追加していません。"
+	},
+	"listingFeed": {
+		"defaultEmpty": "該当する商品が見つかりませんでした。",
+		"searchPlaceholder": "タイトルで検索",
+		"allCategories": "すべてのカテゴリー",
+		"anyStatus": "すべてのステータス",
+		"sort": {
+			"createdDesc": "新着順",
+			"createdAsc": "古い順",
+			"priceAsc": "価格が安い順",
+			"priceDesc": "価格が高い順"
+		},
+		"prev": "戻る",
+		"next": "次へ",
+		"pageOf": "{{page}} / {{total}} ページ"
+	},
+	"listingCard": {
+		"addFavorite": "お気に入りに追加",
+		"removeFavorite": "お気に入りから削除",
+		"updateFavoriteError": "お気に入りを更新できませんでした"
+	},
+	"listingCondition": {
+		"new": "新品",
+		"used": "中古"
+	},
+	"listingStatus": {
+		"active": "出品中",
+		"reserved": "予約済み",
+		"sold": "売却済み"
+	},
+	"listingDetail": {
+		"seller": "出品者",
+		"category": "カテゴリー",
+		"condition": "状態",
+		"createdAt": "出品日",
+		"changeStatus": "ステータスを変更：",
+		"deleteConfirm": "この商品を削除しますか？この操作は元に戻せません。",
+		"deletedToast": "商品を削除しました",
+		"deleteErrorToast": "商品を削除できませんでした",
+		"statusUpdatedToast": "ステータスを更新しました",
+		"statusErrorToast": "ステータスを変更できませんでした",
+		"notFound": "商品が見つかりません。"
+	},
+	"listingForm": {
+		"createTitle": "新規出品",
+		"editTitle": "出品内容を編集",
+		"fields": {
+			"title": "タイトル",
+			"description": "説明",
+			"price": "価格、₽",
+			"category": "カテゴリー",
+			"categoryPlaceholder": "カテゴリーを選択",
+			"condition": "状態"
+		},
+		"photos": {
+			"label": "写真（{{count}}/{{max}}）",
+			"dropHint": "ここに写真をドラッグするか",
+			"chooseFiles": "ファイルを選択",
+			"remove": "写真を削除"
+		},
+		"submitCreate": "出品する",
+		"submitEdit": "変更を保存",
+		"submitError": "出品を保存できませんでした。入力内容を確認してもう一度お試しください。",
+		"photoUploadError": "写真の一部をアップロードできませんでした。",
+		"photoDeleteError": "写真を削除できませんでした。",
+		"createdToast": "出品しました",
+		"updatedToast": "変更を保存しました"
+	},
+	"profilePage": {
+		"title": "プロフィール",
+		"changePhoto": "写真を変更",
+		"uploading": "アップロード中...",
+		"removePhoto": "写真を削除",
+		"usernameLabel": "ユーザー名",
+		"telegramLabel": "Telegram",
+		"editProfile": "プロフィールを編集",
+		"telegramNotSet": "Telegramが未設定です",
+		"myListings": "自分の出品",
+		"myListingsEmpty": "まだ出品はありません。",
+		"language": "言語",
+		"updatedToast": "プロフィールを更新しました",
+		"updateErrorToast": "プロフィールを保存できませんでした",
+		"avatarUpdatedToast": "プロフィール写真を更新しました",
+		"avatarErrorToast": "写真をアップロードできませんでした",
+		"avatarRemovedToast": "プロフィール写真を削除しました",
+		"avatarRemoveErrorToast": "写真を削除できませんでした"
+	},
+	"userProfilePage": {
+		"title": "ユーザープロフィール",
+		"telegramNotSet": "Telegramが未設定です",
+		"listingsTitle": "ユーザーの出品",
+		"listingsEmpty": "このユーザーはまだ出品中の商品がありません。",
+		"notFound": "ユーザーが見つかりません。"
+	}
+}

@@ -1,0 +1,125 @@
+{
+	"common": {
+		"loading": "लोड हो रहा है...",
+		"cancel": "रद्द करें",
+		"save": "सहेजें",
+		"delete": "हटाएं",
+		"edit": "संपादित करें",
+		"noPhoto": "कोई फोटो नहीं"
+	},
+	"nav": {
+		"recommendations": "सिफारिशें",
+		"favorites": "पसंदीदा",
+		"createListing": "+",
+		"profile": "प्रोफ़ाइल"
+	},
+	"auth": {
+		"login": "लॉग इन करें",
+		"logout": "लॉग आउट करें"
+	},
+	"loginPage": {
+		"title": "Unishop",
+		"subtitle": "विश्वविद्यालय वर्गीकृत विज्ञापन बोर्ड"
+	},
+	"homePage": {
+		"title": "सिफारिशें",
+		"empty": "अभी तक कोई सक्रिय विज्ञापन नहीं है।"
+	},
+	"favoritesPage": {
+		"title": "पसंदीदा",
+		"empty": "आपने अभी तक पसंदीदा में कुछ नहीं जोड़ा है।"
+	},
+	"listingFeed": {
+		"defaultEmpty": "कुछ नहीं मिला।",
+		"searchPlaceholder": "शीर्षक से खोजें",
+		"allCategories": "सभी श्रेणियाँ",
+		"anyStatus": "कोई भी स्थिति",
+		"sort": {
+			"createdDesc": "पहले नए",
+			"createdAsc": "पहले पुराने",
+			"priceAsc": "कीमत: कम से अधिक",
+			"priceDesc": "कीमत: अधिक से कम"
+		},
+		"prev": "पीछे",
+		"next": "आगे",
+		"pageOf": "पृष्ठ {{page}} / {{total}}"
+	},
+	"listingCard": {
+		"addFavorite": "पसंदीदा में जोड़ें",
+		"removeFavorite": "पसंदीदा से हटाएं",
+		"updateFavoriteError": "पसंदीदा अपडेट नहीं हो सका"
+	},
+	"listingCondition": {
+		"new": "नया",
+		"used": "पुराना"
+	},
+	"listingStatus": {
+		"active": "सक्रिय",
+		"reserved": "आरक्षित",
+		"sold": "बिक गया"
+	},
+	"listingDetail": {
+		"seller": "विक्रेता",
+		"category": "श्रेणी",
+		"condition": "स्थिति",
+		"createdAt": "प्रकाशित तिथि",
+		"changeStatus": "स्थिति बदलें:",
+		"deleteConfirm": "क्या इस विज्ञापन को हटाना है? यह पूर्ववत नहीं किया जा सकता।",
+		"deletedToast": "विज्ञापन हटा दिया गया",
+		"deleteErrorToast": "विज्ञापन हटाया नहीं जा सका",
+		"statusUpdatedToast": "स्थिति अपडेट की गई",
+		"statusErrorToast": "स्थिति बदली नहीं जा सकी",
+		"notFound": "विज्ञापन नहीं मिला।"
+	},
+	"listingForm": {
+		"createTitle": "नया विज्ञापन",
+		"editTitle": "विज्ञापन संपादित करें",
+		"fields": {
+			"title": "शीर्षक",
+			"description": "विवरण",
+			"price": "कीमत, ₽",
+			"category": "श्रेणी",
+			"categoryPlaceholder": "श्रेणी चुनें",
+			"condition": "स्थिति"
+		},
+		"photos": {
+			"label": "फ़ोटो ({{count}}/{{max}})",
+			"dropHint": "फ़ोटो यहाँ खींचें या",
+			"chooseFiles": "फ़ाइलें चुनें",
+			"remove": "फ़ोटो हटाएं"
+		},
+		"submitCreate": "विज्ञापन प्रकाशित करें",
+		"submitEdit": "बदलाव सहेजें",
+		"submitError": "विज्ञापन सहेजा नहीं जा सका। फ़ील्ड जांचें और फिर से प्रयास करें।",
+		"photoUploadError": "एक फ़ोटो अपलोड नहीं हो सकी।",
+		"photoDeleteError": "फ़ोटो हटाई नहीं जा सकी।",
+		"createdToast": "विज्ञापन प्रकाशित हुआ",
+		"updatedToast": "बदलाव सहेजे गए"
+	},
+	"profilePage": {
+		"title": "प्रोफ़ाइल",
+		"changePhoto": "फ़ोटो बदलें",
+		"uploading": "अपलोड हो रहा है...",
+		"removePhoto": "फ़ोटो हटाएं",
+		"usernameLabel": "उपयोगकर्ता नाम",
+		"telegramLabel": "Telegram",
+		"editProfile": "प्रोफ़ाइल संपादित करें",
+		"telegramNotSet": "Telegram सेट नहीं है",
+		"myListings": "मेरे विज्ञापन",
+		"myListingsEmpty": "आपके पास अभी तक कोई विज्ञापन नहीं है।",
+		"language": "भाषा",
+		"updatedToast": "प्रोफ़ाइल अपडेट हुई",
+		"updateErrorToast": "प्रोफ़ाइल सहेजी नहीं जा सकी",
+		"avatarUpdatedToast": "प्रोफ़ाइल फ़ोटो अपडेट हुई",
+		"avatarErrorToast": "फ़ोटो अपलोड नहीं हो सकी",
+		"avatarRemovedToast": "प्रोफ़ाइल फ़ोटो हटाई गई",
+		"avatarRemoveErrorToast": "फ़ोटो हटाई नहीं जा सकी"
+	},
+	"userProfilePage": {
+		"title": "उपयोगकर्ता प्रोफ़ाइल",
+		"telegramNotSet": "Telegram सेट नहीं है",
+		"listingsTitle": "उपयोगकर्ता के विज्ञापन",
+		"listingsEmpty": "इस उपयोगकर्ता के पास अभी कोई सक्रिय विज्ञापन नहीं है।",
+		"notFound": "उपयोगकर्ता नहीं मिला।"
+	}
+}

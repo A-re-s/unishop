@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { env } from "@/shared/config/env";
 import styles from "./logout-button.module.css";
 
@@ -5,9 +6,11 @@ import styles from "./logout-button.module.css";
 // browser through Keycloak's own end-session endpoint so its SSO cookie is
 // cleared too, not just our app's session — same reasoning as LoginButton.
 export function LogoutButton() {
+	const { t } = useTranslation();
+
 	return (
 		<a className={styles.button} href={`${env.apiUrl}/v1/auth/logout`}>
-			Выйти
+			{t("auth.logout")}
 		</a>
 	);
 }

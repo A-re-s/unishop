@@ -1,0 +1,125 @@
+{
+	"common": {
+		"loading": "لوڈ ہو رہا ہے...",
+		"cancel": "منسوخ کریں",
+		"save": "محفوظ کریں",
+		"delete": "حذف کریں",
+		"edit": "ترمیم کریں",
+		"noPhoto": "کوئی تصویر نہیں"
+	},
+	"nav": {
+		"recommendations": "تجاویز",
+		"favorites": "پسندیدہ",
+		"createListing": "+",
+		"profile": "پروفائل"
+	},
+	"auth": {
+		"login": "لاگ ان کریں",
+		"logout": "لاگ آؤٹ کریں"
+	},
+	"loginPage": {
+		"title": "Unishop",
+		"subtitle": "یونیورسٹی درجہ بند اشتہارات بورڈ"
+	},
+	"homePage": {
+		"title": "تجاویز",
+		"empty": "ابھی تک کوئی فعال اشتہار نہیں ہے۔"
+	},
+	"favoritesPage": {
+		"title": "پسندیدہ",
+		"empty": "آپ نے ابھی تک پسندیدہ میں کچھ شامل نہیں کیا۔"
+	},
+	"listingFeed": {
+		"defaultEmpty": "کچھ نہیں ملا۔",
+		"searchPlaceholder": "عنوان سے تلاش کریں",
+		"allCategories": "تمام زمرہ جات",
+		"anyStatus": "کوئی بھی حالت",
+		"sort": {
+			"createdDesc": "پہلے نئے",
+			"createdAsc": "پہلے پرانے",
+			"priceAsc": "قیمت: کم سے زیادہ",
+			"priceDesc": "قیمت: زیادہ سے کم"
+		},
+		"prev": "پیچھے",
+		"next": "اگلا",
+		"pageOf": "صفحہ {{page}} از {{total}}"
+	},
+	"listingCard": {
+		"addFavorite": "پسندیدہ میں شامل کریں",
+		"removeFavorite": "پسندیدہ سے ہٹائیں",
+		"updateFavoriteError": "پسندیدہ اپ ڈیٹ نہیں ہو سکا"
+	},
+	"listingCondition": {
+		"new": "نیا",
+		"used": "استعمال شدہ"
+	},
+	"listingStatus": {
+		"active": "دستیاب",
+		"reserved": "محفوظ شدہ",
+		"sold": "فروخت ہو گیا"
+	},
+	"listingDetail": {
+		"seller": "بیچنے والا",
+		"category": "زمرہ",
+		"condition": "حالت",
+		"createdAt": "تاریخ اشاعت",
+		"changeStatus": "حالت تبدیل کریں:",
+		"deleteConfirm": "کیا یہ اشتہار حذف کرنا ہے؟ اسے واپس نہیں لایا جا سکتا۔",
+		"deletedToast": "اشتہار حذف کر دیا گیا",
+		"deleteErrorToast": "اشتہار حذف نہیں ہو سکا",
+		"statusUpdatedToast": "حالت اپ ڈیٹ ہو گئی",
+		"statusErrorToast": "حالت تبدیل نہیں ہو سکی",
+		"notFound": "اشتہار نہیں ملا۔"
+	},
+	"listingForm": {
+		"createTitle": "نیا اشتہار",
+		"editTitle": "اشتہار میں ترمیم کریں",
+		"fields": {
+			"title": "عنوان",
+			"description": "تفصیل",
+			"price": "قیمت، ₽",
+			"category": "زمرہ",
+			"categoryPlaceholder": "زمرہ منتخب کریں",
+			"condition": "حالت"
+		},
+		"photos": {
+			"label": "تصاویر ({{count}}/{{max}})",
+			"dropHint": "تصاویر یہاں گھسیٹیں یا",
+			"chooseFiles": "فائلیں منتخب کریں",
+			"remove": "تصویر حذف کریں"
+		},
+		"submitCreate": "اشتہار شائع کریں",
+		"submitEdit": "تبدیلیاں محفوظ کریں",
+		"submitError": "اشتہار محفوظ نہیں ہو سکا۔ فیلڈز چیک کریں اور دوبارہ کوشش کریں۔",
+		"photoUploadError": "ایک تصویر اپ لوڈ نہیں ہو سکی۔",
+		"photoDeleteError": "تصویر حذف نہیں ہو سکی۔",
+		"createdToast": "اشتہار شائع ہو گیا",
+		"updatedToast": "تبدیلیاں محفوظ ہو گئیں"
+	},
+	"profilePage": {
+		"title": "پروفائل",
+		"changePhoto": "تصویر تبدیل کریں",
+		"uploading": "اپ لوڈ ہو رہا ہے...",
+		"removePhoto": "تصویر حذف کریں",
+		"usernameLabel": "صارف نام",
+		"telegramLabel": "Telegram",
+		"editProfile": "پروفائل میں ترمیم کریں",
+		"telegramNotSet": "Telegram سیٹ نہیں ہے",
+		"myListings": "میرے اشتہارات",
+		"myListingsEmpty": "ابھی تک آپ کا کوئی اشتہار نہیں ہے۔",
+		"language": "زبان",
+		"updatedToast": "پروفائل اپ ڈیٹ ہو گئی",
+		"updateErrorToast": "پروفائل محفوظ نہیں ہو سکی",
+		"avatarUpdatedToast": "پروفائل تصویر اپ ڈیٹ ہو گئی",
+		"avatarErrorToast": "تصویر اپ لوڈ نہیں ہو سکی",
+		"avatarRemovedToast": "پروفائل تصویر حذف کر دی گئی",
+		"avatarRemoveErrorToast": "تصویر حذف نہیں ہو سکی"
+	},
+	"userProfilePage": {
+		"title": "صارف پروفائل",
+		"telegramNotSet": "Telegram سیٹ نہیں ہے",
+		"listingsTitle": "صارف کے اشتہارات",
+		"listingsEmpty": "اس صارف کے پاس ابھی تک کوئی فعال اشتہار نہیں ہے۔",
+		"notFound": "صارف نہیں ملا۔"
+	}
+}

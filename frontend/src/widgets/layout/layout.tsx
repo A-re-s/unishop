@@ -1,7 +1,10 @@
+import { useTranslation } from "react-i18next";
 import { NavLink, Outlet } from "react-router-dom";
 import styles from "./layout.module.css";
 
 export function Layout() {
+	const { t } = useTranslation();
+
 	return (
 		<div className={styles.root}>
 			<nav className={styles.nav}>
@@ -12,7 +15,7 @@ export function Layout() {
 						isActive ? styles.activeLink : styles.link
 					}
 				>
-					Рекомендации
+					{t("nav.recommendations")}
 				</NavLink>
 				<NavLink
 					to="/favorites"
@@ -20,7 +23,7 @@ export function Layout() {
 						isActive ? styles.activeLink : styles.link
 					}
 				>
-					Избранное
+					{t("nav.favorites")}
 				</NavLink>
 				<NavLink
 					to="/listings/create"
@@ -28,7 +31,7 @@ export function Layout() {
 						isActive ? styles.activeLink : styles.link
 					}
 				>
-					+
+					{t("nav.createListing")}
 				</NavLink>
 				<NavLink
 					to="/profile"
@@ -36,7 +39,7 @@ export function Layout() {
 						isActive ? styles.activeLink : styles.link
 					}
 				>
-					Профиль
+					{t("nav.profile")}
 				</NavLink>
 			</nav>
 			<main className={styles.content}>

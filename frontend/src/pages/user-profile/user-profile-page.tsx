@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Navigate, useParams } from "react-router-dom";
 import { useGetListingsQuery } from "@/entities/listing/api/listing-api";
 import { useGetMeQuery, useGetUserQuery } from "@/entities/user/api/user-api";
@@ -6,6 +7,7 @@ import { ListingFeed } from "@/widgets/listing-feed/listing-feed";
 import styles from "./user-profile-page.module.css";
 
 export function UserProfilePage() {
+	const { t } = useTranslation();
 	const { userId = "" } = useParams();
 	const { data: me } = useGetMeQuery();
 	const {
@@ -19,16 +21,16 @@ export function UserProfilePage() {
 	}
 
 	if (isLoading) {
-		return <p>Загрузка...</p>;
+		return <p>{t("common.loading")}</p>;
 	}
 
 	if (isError || !user) {
-		return <p>Пользователь не найден.</p>;
+		return <p>{t("userProfilePage.notFound")}</p>;
 	}
 
 	return (
 		<div>
-			<h1>Профиль пользователя</h1>
+			<h1>{t("userProfilePage.title")}</h1>
 
 			<div className={styles.card}>
 				{user.avatar_url ? (
@@ -54,17 +56,21 @@ export function UserProfilePage() {
 							@{formatTelegramHandle(user.telegram_username)}
 						</a>
 					) : (
-						<p className={styles.telegram}>Telegram не указан</p>
+						<p className={styles.telegram}>
+							{t("userProfilePage.telegramNotSet")}
+						</p>
 					)}
 				</div>
 			</div>
 
-			<h2 className={styles.sectionTitle}>Объявления пользователя</h2>
+			<h2 className={styles.sectionTitle}>
+				{t("userProfilePage.listingsTitle")}
+			</h2>
 			<ListingFeed
 				useListingsQuery={useGetListingsQuery}
 				fixedParams={{ author_id: user.id }}
 				defaultStatus="active"
-				emptyMessage="У пользователя пока нет активных объявлений."
+				emptyMessage={t("userProfilePage.listingsEmpty")}
 			/>
 		</div>
 	);

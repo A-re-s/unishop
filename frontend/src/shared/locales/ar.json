@@ -1,0 +1,125 @@
+{
+	"common": {
+		"loading": "جارٍ التحميل...",
+		"cancel": "إلغاء",
+		"save": "حفظ",
+		"delete": "حذف",
+		"edit": "تعديل",
+		"noPhoto": "لا توجد صورة"
+	},
+	"nav": {
+		"recommendations": "التوصيات",
+		"favorites": "المفضلة",
+		"createListing": "+",
+		"profile": "الملف الشخصي"
+	},
+	"auth": {
+		"login": "تسجيل الدخول",
+		"logout": "تسجيل الخروج"
+	},
+	"loginPage": {
+		"title": "Unishop",
+		"subtitle": "لوحة إعلانات الجامعة"
+	},
+	"homePage": {
+		"title": "التوصيات",
+		"empty": "لا توجد إعلانات نشطة حتى الآن."
+	},
+	"favoritesPage": {
+		"title": "المفضلة",
+		"empty": "لم تُضف أي شيء إلى المفضلة بعد."
+	},
+	"listingFeed": {
+		"defaultEmpty": "لم يتم العثور على شيء.",
+		"searchPlaceholder": "البحث حسب العنوان",
+		"allCategories": "جميع الفئات",
+		"anyStatus": "أي حالة",
+		"sort": {
+			"createdDesc": "الأحدث أولاً",
+			"createdAsc": "الأقدم أولاً",
+			"priceAsc": "السعر: من الأقل إلى الأعلى",
+			"priceDesc": "السعر: من الأعلى إلى الأقل"
+		},
+		"prev": "السابق",
+		"next": "التالي",
+		"pageOf": "الصفحة {{page}} من {{total}}"
+	},
+	"listingCard": {
+		"addFavorite": "إضافة إلى المفضلة",
+		"removeFavorite": "إزالة من المفضلة",
+		"updateFavoriteError": "تعذّر تحديث المفضلة"
+	},
+	"listingCondition": {
+		"new": "جديد",
+		"used": "مستعمل"
+	},
+	"listingStatus": {
+		"active": "متاح",
+		"reserved": "محجوز",
+		"sold": "تم البيع"
+	},
+	"listingDetail": {
+		"seller": "البائع",
+		"category": "الفئة",
+		"condition": "الحالة",
+		"createdAt": "تاريخ النشر",
+		"changeStatus": "تغيير الحالة:",
+		"deleteConfirm": "هل تريد حذف هذا الإعلان؟ لا يمكن التراجع عن هذا الإجراء.",
+		"deletedToast": "تم حذف الإعلان",
+		"deleteErrorToast": "تعذّر حذف الإعلان",
+		"statusUpdatedToast": "تم تحديث الحالة",
+		"statusErrorToast": "تعذّر تغيير الحالة",
+		"notFound": "الإعلان غير موجود."
+	},
+	"listingForm": {
+		"createTitle": "إعلان جديد",
+		"editTitle": "تعديل الإعلان",
+		"fields": {
+			"title": "العنوان",
+			"description": "الوصف",
+			"price": "السعر، ₽",
+			"category": "الفئة",
+			"categoryPlaceholder": "اختر فئة",
+			"condition": "الحالة"
+		},
+		"photos": {
+			"label": "الصور ({{count}}/{{max}})",
+			"dropHint": "اسحب الصور هنا أو",
+			"chooseFiles": "اختر الملفات",
+			"remove": "حذف الصورة"
+		},
+		"submitCreate": "نشر الإعلان",
+		"submitEdit": "حفظ التغييرات",
+		"submitError": "تعذّر حفظ الإعلان. تحقق من الحقول وحاول مرة أخرى.",
+		"photoUploadError": "تعذّر رفع إحدى الصور.",
+		"photoDeleteError": "تعذّر حذف الصورة.",
+		"createdToast": "تم نشر الإعلان",
+		"updatedToast": "تم حفظ التغييرات"
+	},
+	"profilePage": {
+		"title": "الملف الشخصي",
+		"changePhoto": "تغيير الصورة",
+		"uploading": "جارٍ الرفع...",
+		"removePhoto": "حذف الصورة",
+		"usernameLabel": "اسم المستخدم",
+		"telegramLabel": "Telegram",
+		"editProfile": "تعديل الملف الشخصي",
+		"telegramNotSet": "لم يتم تحديد Telegram",
+		"myListings": "إعلاناتي",
+		"myListingsEmpty": "ليس لديك أي إعلانات بعد.",
+		"language": "اللغة",
+		"updatedToast": "تم تحديث الملف الشخصي",
+		"updateErrorToast": "تعذّر حفظ الملف الشخصي",
+		"avatarUpdatedToast": "تم تحديث صورة الملف الشخصي",
+		"avatarErrorToast": "تعذّر رفع الصورة",
+		"avatarRemovedToast": "تم حذف صورة الملف الشخصي",
+		"avatarRemoveErrorToast": "تعذّر حذف الصورة"
+	},
+	"userProfilePage": {
+		"title": "الملف الشخصي للمستخدم",
+		"telegramNotSet": "لم يتم تحديد Telegram",
+		"listingsTitle": "إعلانات المستخدم",
+		"listingsEmpty": "لا توجد إعلانات نشطة لهذا المستخدم بعد.",
+		"notFound": "المستخدم غير موجود."
+	}
+}
