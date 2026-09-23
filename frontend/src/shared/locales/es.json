@@ -1,0 +1,125 @@
+{
+	"common": {
+		"loading": "Cargando...",
+		"cancel": "Cancelar",
+		"save": "Guardar",
+		"delete": "Eliminar",
+		"edit": "Editar",
+		"noPhoto": "Sin foto"
+	},
+	"nav": {
+		"recommendations": "Recomendaciones",
+		"favorites": "Favoritos",
+		"createListing": "+",
+		"profile": "Perfil"
+	},
+	"auth": {
+		"login": "Iniciar sesión",
+		"logout": "Cerrar sesión"
+	},
+	"loginPage": {
+		"title": "Unishop",
+		"subtitle": "Tablón de anuncios universitario"
+	},
+	"homePage": {
+		"title": "Recomendaciones",
+		"empty": "Todavía no hay anuncios activos."
+	},
+	"favoritesPage": {
+		"title": "Favoritos",
+		"empty": "Aún no has añadido nada a favoritos."
+	},
+	"listingFeed": {
+		"defaultEmpty": "No se encontró nada.",
+		"searchPlaceholder": "Buscar por título",
+		"allCategories": "Todas las categorías",
+		"anyStatus": "Cualquier estado",
+		"sort": {
+			"createdDesc": "Más recientes primero",
+			"createdAsc": "Más antiguos primero",
+			"priceAsc": "Precio: menor a mayor",
+			"priceDesc": "Precio: mayor a menor"
+		},
+		"prev": "Atrás",
+		"next": "Siguiente",
+		"pageOf": "Página {{page}} de {{total}}"
+	},
+	"listingCard": {
+		"addFavorite": "Añadir a favoritos",
+		"removeFavorite": "Quitar de favoritos",
+		"updateFavoriteError": "No se pudieron actualizar los favoritos"
+	},
+	"listingCondition": {
+		"new": "Nuevo",
+		"used": "Usado"
+	},
+	"listingStatus": {
+		"active": "Activo",
+		"reserved": "Reservado",
+		"sold": "Vendido"
+	},
+	"listingDetail": {
+		"seller": "Vendedor",
+		"category": "Categoría",
+		"condition": "Estado",
+		"createdAt": "Publicado el",
+		"changeStatus": "Cambiar estado:",
+		"deleteConfirm": "¿Eliminar este anuncio? Esta acción no se puede deshacer.",
+		"deletedToast": "Anuncio eliminado",
+		"deleteErrorToast": "No se pudo eliminar el anuncio",
+		"statusUpdatedToast": "Estado actualizado",
+		"statusErrorToast": "No se pudo cambiar el estado",
+		"notFound": "Anuncio no encontrado."
+	},
+	"listingForm": {
+		"createTitle": "Nuevo anuncio",
+		"editTitle": "Editar anuncio",
+		"fields": {
+			"title": "Título",
+			"description": "Descripción",
+			"price": "Precio, ₽",
+			"category": "Categoría",
+			"categoryPlaceholder": "Elige una categoría",
+			"condition": "Estado"
+		},
+		"photos": {
+			"label": "Fotos ({{count}}/{{max}})",
+			"dropHint": "Arrastra las fotos aquí o",
+			"chooseFiles": "elige archivos",
+			"remove": "Eliminar foto"
+		},
+		"submitCreate": "Publicar anuncio",
+		"submitEdit": "Guardar cambios",
+		"submitError": "No se pudo guardar el anuncio. Revisa los campos e inténtalo de nuevo.",
+		"photoUploadError": "No se pudo subir una de las fotos.",
+		"photoDeleteError": "No se pudo eliminar la foto.",
+		"createdToast": "Anuncio publicado",
+		"updatedToast": "Cambios guardados"
+	},
+	"profilePage": {
+		"title": "Perfil",
+		"changePhoto": "Cambiar foto",
+		"uploading": "Subiendo...",
+		"removePhoto": "Eliminar foto",
+		"usernameLabel": "Nombre de usuario",
+		"telegramLabel": "Telegram",
+		"editProfile": "Editar perfil",
+		"telegramNotSet": "Telegram no configurado",
+		"myListings": "Mis anuncios",
+		"myListingsEmpty": "Todavía no tienes ningún anuncio.",
+		"language": "Idioma",
+		"updatedToast": "Perfil actualizado",
+		"updateErrorToast": "No se pudo guardar el perfil",
+		"avatarUpdatedToast": "Foto de perfil actualizada",
+		"avatarErrorToast": "No se pudo subir la foto",
+		"avatarRemovedToast": "Foto de perfil eliminada",
+		"avatarRemoveErrorToast": "No se pudo eliminar la foto"
+	},
+	"userProfilePage": {
+		"title": "Perfil de usuario",
+		"telegramNotSet": "Telegram no configurado",
+		"listingsTitle": "Anuncios del usuario",
+		"listingsEmpty": "Este usuario todavía no tiene anuncios activos.",
+		"notFound": "Usuario no encontrado."
+	}
+}

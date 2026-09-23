@@ -1,0 +1,125 @@
+{
+	"common": {
+		"loading": "লোড হচ্ছে...",
+		"cancel": "বাতিল",
+		"save": "সংরক্ষণ করুন",
+		"delete": "মুছুন",
+		"edit": "সম্পাদনা করুন",
+		"noPhoto": "কোনো ছবি নেই"
+	},
+	"nav": {
+		"recommendations": "সুপারিশ",
+		"favorites": "প্রিয়",
+		"createListing": "+",
+		"profile": "প্রোফাইল"
+	},
+	"auth": {
+		"login": "লগ ইন",
+		"logout": "লগ আউট"
+	},
+	"loginPage": {
+		"title": "Unishop",
+		"subtitle": "বিশ্ববিদ্যালয়ের শ্রেণীবদ্ধ বিজ্ঞাপন বোর্ড"
+	},
+	"homePage": {
+		"title": "সুপারিশ",
+		"empty": "এখনো কোনো সক্রিয় বিজ্ঞাপন নেই।"
+	},
+	"favoritesPage": {
+		"title": "প্রিয়",
+		"empty": "আপনি এখনো প্রিয়তে কিছু যোগ করেননি।"
+	},
+	"listingFeed": {
+		"defaultEmpty": "কিছু পাওয়া যায়নি।",
+		"searchPlaceholder": "শিরোনাম দিয়ে খুঁজুন",
+		"allCategories": "সব বিভাগ",
+		"anyStatus": "যেকোনো অবস্থা",
+		"sort": {
+			"createdDesc": "নতুন আগে",
+			"createdAsc": "পুরনো আগে",
+			"priceAsc": "দাম: কম থেকে বেশি",
+			"priceDesc": "দাম: বেশি থেকে কম"
+		},
+		"prev": "পিছনে",
+		"next": "পরবর্তী",
+		"pageOf": "পৃষ্ঠা {{page}} / {{total}}"
+	},
+	"listingCard": {
+		"addFavorite": "প্রিয়তে যোগ করুন",
+		"removeFavorite": "প্রিয় থেকে সরান",
+		"updateFavoriteError": "প্রিয় হালনাগাদ করা যায়নি"
+	},
+	"listingCondition": {
+		"new": "নতুন",
+		"used": "পুরাতন"
+	},
+	"listingStatus": {
+		"active": "সক্রিয়",
+		"reserved": "সংরক্ষিত",
+		"sold": "বিক্রি হয়ে গেছে"
+	},
+	"listingDetail": {
+		"seller": "বিক্রেতা",
+		"category": "বিভাগ",
+		"condition": "অবস্থা",
+		"createdAt": "প্রকাশের তারিখ",
+		"changeStatus": "অবস্থা পরিবর্তন করুন:",
+		"deleteConfirm": "এই বিজ্ঞাপনটি মুছবেন? এটি পূর্বাবস্থায় ফেরানো যাবে না।",
+		"deletedToast": "বিজ্ঞাপন মুছে ফেলা হয়েছে",
+		"deleteErrorToast": "বিজ্ঞাপন মোছা যায়নি",
+		"statusUpdatedToast": "অবস্থা হালনাগাদ হয়েছে",
+		"statusErrorToast": "অবস্থা পরিবর্তন করা যায়নি",
+		"notFound": "বিজ্ঞাপন পাওয়া যায়নি।"
+	},
+	"listingForm": {
+		"createTitle": "নতুন বিজ্ঞাপন",
+		"editTitle": "বিজ্ঞাপন সম্পাদনা করুন",
+		"fields": {
+			"title": "শিরোনাম",
+			"description": "বিবরণ",
+			"price": "দাম, ₽",
+			"category": "বিভাগ",
+			"categoryPlaceholder": "একটি বিভাগ নির্বাচন করুন",
+			"condition": "অবস্থা"
+		},
+		"photos": {
+			"label": "ছবি ({{count}}/{{max}})",
+			"dropHint": "ছবি এখানে টেনে আনুন অথবা",
+			"chooseFiles": "ফাইল নির্বাচন করুন",
+			"remove": "ছবি মুছুন"
+		},
+		"submitCreate": "বিজ্ঞাপন প্রকাশ করুন",
+		"submitEdit": "পরিবর্তন সংরক্ষণ করুন",
+		"submitError": "বিজ্ঞাপনটি সংরক্ষণ করা যায়নি। ক্ষেত্রগুলো পরীক্ষা করে আবার চেষ্টা করুন।",
+		"photoUploadError": "একটি ছবি আপলোড করা যায়নি।",
+		"photoDeleteError": "ছবি মোছা যায়নি।",
+		"createdToast": "বিজ্ঞাপন প্রকাশিত হয়েছে",
+		"updatedToast": "পরিবর্তন সংরক্ষিত হয়েছে"
+	},
+	"profilePage": {
+		"title": "প্রোফাইল",
+		"changePhoto": "ছবি পরিবর্তন করুন",
+		"uploading": "আপলোড হচ্ছে...",
+		"removePhoto": "ছবি মুছুন",
+		"usernameLabel": "ব্যবহারকারীর নাম",
+		"telegramLabel": "Telegram",
+		"editProfile": "প্রোফাইল সম্পাদনা করুন",
+		"telegramNotSet": "Telegram সেট করা হয়নি",
+		"myListings": "আমার বিজ্ঞাপন",
+		"myListingsEmpty": "আপনার এখনো কোনো বিজ্ঞাপন নেই।",
+		"language": "ভাষা",
+		"updatedToast": "প্রোফাইল হালনাগাদ হয়েছে",
+		"updateErrorToast": "প্রোফাইল সংরক্ষণ করা যায়নি",
+		"avatarUpdatedToast": "প্রোফাইল ছবি হালনাগাদ হয়েছে",
+		"avatarErrorToast": "ছবি আপলোড করা যায়নি",
+		"avatarRemovedToast": "প্রোফাইল ছবি মুছে ফেলা হয়েছে",
+		"avatarRemoveErrorToast": "ছবি মোছা যায়নি"
+	},
+	"userProfilePage": {
+		"title": "ব্যবহারকারীর প্রোফাইল",
+		"telegramNotSet": "Telegram সেট করা হয়নি",
+		"listingsTitle": "ব্যবহারকারীর বিজ্ঞাপন",
+		"listingsEmpty": "এই ব্যবহারকারীর এখনো কোনো সক্রিয় বিজ্ঞাপন নেই।",
+		"notFound": "ব্যবহারকারী পাওয়া যায়নি।"
+	}
+}

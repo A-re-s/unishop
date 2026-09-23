@@ -1,0 +1,125 @@
+{
+	"common": {
+		"loading": "Memuat...",
+		"cancel": "Batal",
+		"save": "Simpan",
+		"delete": "Hapus",
+		"edit": "Edit",
+		"noPhoto": "Tidak ada foto"
+	},
+	"nav": {
+		"recommendations": "Rekomendasi",
+		"favorites": "Favorit",
+		"createListing": "+",
+		"profile": "Profil"
+	},
+	"auth": {
+		"login": "Masuk",
+		"logout": "Keluar"
+	},
+	"loginPage": {
+		"title": "Unishop",
+		"subtitle": "Papan iklan baris universitas"
+	},
+	"homePage": {
+		"title": "Rekomendasi",
+		"empty": "Belum ada iklan aktif."
+	},
+	"favoritesPage": {
+		"title": "Favorit",
+		"empty": "Anda belum menambahkan apa pun ke favorit."
+	},
+	"listingFeed": {
+		"defaultEmpty": "Tidak ditemukan apa pun.",
+		"searchPlaceholder": "Cari berdasarkan judul",
+		"allCategories": "Semua kategori",
+		"anyStatus": "Status apa pun",
+		"sort": {
+			"createdDesc": "Terbaru lebih dulu",
+			"createdAsc": "Terlama lebih dulu",
+			"priceAsc": "Harga: rendah ke tinggi",
+			"priceDesc": "Harga: tinggi ke rendah"
+		},
+		"prev": "Kembali",
+		"next": "Berikutnya",
+		"pageOf": "Halaman {{page}} dari {{total}}"
+	},
+	"listingCard": {
+		"addFavorite": "Tambahkan ke favorit",
+		"removeFavorite": "Hapus dari favorit",
+		"updateFavoriteError": "Gagal memperbarui favorit"
+	},
+	"listingCondition": {
+		"new": "Baru",
+		"used": "Bekas"
+	},
+	"listingStatus": {
+		"active": "Aktif",
+		"reserved": "Dipesan",
+		"sold": "Terjual"
+	},
+	"listingDetail": {
+		"seller": "Penjual",
+		"category": "Kategori",
+		"condition": "Kondisi",
+		"createdAt": "Tanggal diposting",
+		"changeStatus": "Ubah status:",
+		"deleteConfirm": "Hapus iklan ini? Tindakan ini tidak dapat dibatalkan.",
+		"deletedToast": "Iklan dihapus",
+		"deleteErrorToast": "Gagal menghapus iklan",
+		"statusUpdatedToast": "Status diperbarui",
+		"statusErrorToast": "Gagal mengubah status",
+		"notFound": "Iklan tidak ditemukan."
+	},
+	"listingForm": {
+		"createTitle": "Iklan baru",
+		"editTitle": "Edit iklan",
+		"fields": {
+			"title": "Judul",
+			"description": "Deskripsi",
+			"price": "Harga, ₽",
+			"category": "Kategori",
+			"categoryPlaceholder": "Pilih kategori",
+			"condition": "Kondisi"
+		},
+		"photos": {
+			"label": "Foto ({{count}}/{{max}})",
+			"dropHint": "Seret foto ke sini atau",
+			"chooseFiles": "pilih file",
+			"remove": "Hapus foto"
+		},
+		"submitCreate": "Terbitkan iklan",
+		"submitEdit": "Simpan perubahan",
+		"submitError": "Gagal menyimpan iklan. Periksa kembali isian dan coba lagi.",
+		"photoUploadError": "Salah satu foto gagal diunggah.",
+		"photoDeleteError": "Foto gagal dihapus.",
+		"createdToast": "Iklan diterbitkan",
+		"updatedToast": "Perubahan disimpan"
+	},
+	"profilePage": {
+		"title": "Profil",
+		"changePhoto": "Ganti foto",
+		"uploading": "Mengunggah...",
+		"removePhoto": "Hapus foto",
+		"usernameLabel": "Nama pengguna",
+		"telegramLabel": "Telegram",
+		"editProfile": "Edit profil",
+		"telegramNotSet": "Telegram belum diatur",
+		"myListings": "Iklan saya",
+		"myListingsEmpty": "Anda belum memiliki iklan.",
+		"language": "Bahasa",
+		"updatedToast": "Profil diperbarui",
+		"updateErrorToast": "Gagal menyimpan profil",
+		"avatarUpdatedToast": "Foto profil diperbarui",
+		"avatarErrorToast": "Gagal mengunggah foto",
+		"avatarRemovedToast": "Foto profil dihapus",
+		"avatarRemoveErrorToast": "Gagal menghapus foto"
+	},
+	"userProfilePage": {
+		"title": "Profil pengguna",
+		"telegramNotSet": "Telegram belum diatur",
+		"listingsTitle": "Iklan pengguna",
+		"listingsEmpty": "Pengguna ini belum memiliki iklan aktif.",
+		"notFound": "Pengguna tidak ditemukan."
+	}
+}

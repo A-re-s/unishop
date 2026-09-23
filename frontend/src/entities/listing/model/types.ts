@@ -22,17 +22,6 @@ export interface Listing {
 	photos: ListingPhoto[];
 }
 
-export const LISTING_CONDITION_LABELS: Record<ListingCondition, string> = {
-	new: "Новое",
-	used: "Б/у",
-};
-
-export const LISTING_STATUS_LABELS: Record<ListingStatus, string> = {
-	active: "Активно",
-	reserved: "Забронировано",
-	sold: "Продано",
-};
-
 // Mirrors ALLOWED_STATUS_TRANSITIONS in backend/services/listing_service.py —
 // determines which status-change buttons the owner sees on a listing.
 export const ALLOWED_STATUS_TRANSITIONS: Record<

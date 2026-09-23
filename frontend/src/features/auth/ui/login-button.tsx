@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { env } from "@/shared/config/env";
 import styles from "./login-button.module.css";
 
@@ -5,9 +6,11 @@ import styles from "./login-button.module.css";
 // navigation so the browser follows the redirect chain to Keycloak's own
 // login page and back.
 export function LoginButton() {
+	const { t } = useTranslation();
+
 	return (
 		<a className={styles.button} href={`${env.apiUrl}/v1/auth/login`}>
-			Войти
+			{t("auth.login")}
 		</a>
 	);
 }

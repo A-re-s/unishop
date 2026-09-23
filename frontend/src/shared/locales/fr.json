@@ -1,0 +1,125 @@
+{
+	"common": {
+		"loading": "Chargement...",
+		"cancel": "Annuler",
+		"save": "Enregistrer",
+		"delete": "Supprimer",
+		"edit": "Modifier",
+		"noPhoto": "Pas de photo"
+	},
+	"nav": {
+		"recommendations": "Recommandations",
+		"favorites": "Favoris",
+		"createListing": "+",
+		"profile": "Profil"
+	},
+	"auth": {
+		"login": "Se connecter",
+		"logout": "Se déconnecter"
+	},
+	"loginPage": {
+		"title": "Unishop",
+		"subtitle": "Petites annonces universitaires"
+	},
+	"homePage": {
+		"title": "Recommandations",
+		"empty": "Aucune annonce active pour le moment."
+	},
+	"favoritesPage": {
+		"title": "Favoris",
+		"empty": "Vous n'avez encore rien ajouté à vos favoris."
+	},
+	"listingFeed": {
+		"defaultEmpty": "Aucun résultat.",
+		"searchPlaceholder": "Rechercher par titre",
+		"allCategories": "Toutes les catégories",
+		"anyStatus": "Tous les statuts",
+		"sort": {
+			"createdDesc": "Plus récents d'abord",
+			"createdAsc": "Plus anciens d'abord",
+			"priceAsc": "Prix croissant",
+			"priceDesc": "Prix décroissant"
+		},
+		"prev": "Précédent",
+		"next": "Suivant",
+		"pageOf": "Page {{page}} sur {{total}}"
+	},
+	"listingCard": {
+		"addFavorite": "Ajouter aux favoris",
+		"removeFavorite": "Retirer des favoris",
+		"updateFavoriteError": "Impossible de mettre à jour les favoris"
+	},
+	"listingCondition": {
+		"new": "Neuf",
+		"used": "Occasion"
+	},
+	"listingStatus": {
+		"active": "Disponible",
+		"reserved": "Réservé",
+		"sold": "Vendu"
+	},
+	"listingDetail": {
+		"seller": "Vendeur",
+		"category": "Catégorie",
+		"condition": "État",
+		"createdAt": "Publié le",
+		"changeStatus": "Changer le statut :",
+		"deleteConfirm": "Supprimer cette annonce ? Cette action est irréversible.",
+		"deletedToast": "Annonce supprimée",
+		"deleteErrorToast": "Impossible de supprimer l'annonce",
+		"statusUpdatedToast": "Statut mis à jour",
+		"statusErrorToast": "Impossible de changer le statut",
+		"notFound": "Annonce introuvable."
+	},
+	"listingForm": {
+		"createTitle": "Nouvelle annonce",
+		"editTitle": "Modifier l'annonce",
+		"fields": {
+			"title": "Titre",
+			"description": "Description",
+			"price": "Prix, ₽",
+			"category": "Catégorie",
+			"categoryPlaceholder": "Choisir une catégorie",
+			"condition": "État"
+		},
+		"photos": {
+			"label": "Photos ({{count}}/{{max}})",
+			"dropHint": "Glissez vos photos ici ou",
+			"chooseFiles": "choisir des fichiers",
+			"remove": "Supprimer la photo"
+		},
+		"submitCreate": "Publier l'annonce",
+		"submitEdit": "Enregistrer les modifications",
+		"submitError": "Impossible d'enregistrer l'annonce. Vérifiez les champs et réessayez.",
+		"photoUploadError": "Impossible d'envoyer l'une des photos.",
+		"photoDeleteError": "Impossible de supprimer la photo.",
+		"createdToast": "Annonce publiée",
+		"updatedToast": "Modifications enregistrées"
+	},
+	"profilePage": {
+		"title": "Profil",
+		"changePhoto": "Changer la photo",
+		"uploading": "Envoi en cours...",
+		"removePhoto": "Supprimer la photo",
+		"usernameLabel": "Nom d'utilisateur",
+		"telegramLabel": "Telegram",
+		"editProfile": "Modifier le profil",
+		"telegramNotSet": "Telegram non renseigné",
+		"myListings": "Mes annonces",
+		"myListingsEmpty": "Vous n'avez encore aucune annonce.",
+		"language": "Langue",
+		"updatedToast": "Profil mis à jour",
+		"updateErrorToast": "Impossible d'enregistrer le profil",
+		"avatarUpdatedToast": "Photo de profil mise à jour",
+		"avatarErrorToast": "Impossible d'envoyer la photo",
+		"avatarRemovedToast": "Photo de profil supprimée",
+		"avatarRemoveErrorToast": "Impossible de supprimer la photo"
+	},
+	"userProfilePage": {
+		"title": "Profil de l'utilisateur",
+		"telegramNotSet": "Telegram non renseigné",
+		"listingsTitle": "Annonces de l'utilisateur",
+		"listingsEmpty": "Cet utilisateur n'a pas encore d'annonce active.",
+		"notFound": "Utilisateur introuvable."
+	}
+}

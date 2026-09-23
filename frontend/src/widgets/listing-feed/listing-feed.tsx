@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useGetCategoriesQuery } from "@/entities/category/api/category-api";
 import type { ListingsQueryParams } from "@/entities/listing/api/listing-api";
+import { useListingStatusLabels } from "@/entities/listing/lib/use-listing-labels";
 import type { Listing, ListingStatus } from "@/entities/listing/model/types";
-import { LISTING_STATUS_LABELS } from "@/entities/listing/model/types";
 import { ListingCard } from "@/entities/listing/ui/listing-card";
 import { useGetMeQuery } from "@/entities/user/api/user-api";
 import type { Page } from "@/shared/api/types";
@@ -16,13 +17,6 @@ type SortOption =
 	| "created_at:asc"
 	| "price:asc"
 	| "price:desc";
-
-const SORT_LABELS: Record<SortOption, string> = {
-	"created_at:desc": "Сначала новые",
-	"created_at:asc": "Сначала старые",
-	"price:asc": "Сначала дешевле",
-	"price:desc": "Сначала дороже",
-};
 
 interface ListingFeedProps {
 	useListingsQuery: (params: ListingsQueryParams) => {
@@ -39,8 +33,17 @@ export function ListingFeed({
 	useListingsQuery,
 	fixedParams,
 	defaultStatus = "",
-	emptyMessage = "Ничего не найдено.",
+	emptyMessage,
 }: ListingFeedProps) {
+	const { t } = useTranslation();
+	const listingStatusLabels = useListingStatusLabels();
+	const sortLabels: Record<SortOption, string> = {
+		"created_at:desc": t("listingFeed.sort.createdDesc"),
+		"created_at:asc": t("listingFeed.sort.createdAsc"),
+		"price:asc": t("listingFeed.sort.priceAsc"),
+		"price:desc": t("listingFeed.sort.priceDesc"),
+	};
+
 	const [search, setSearch] = useState("");
 	const [categoryId, setCategoryId] = useState("");
 	const [status, setStatus] = useState<ListingStatus | "">(defaultStatus);
@@ -89,7 +92,7 @@ export function ListingFeed({
 				<input
 					className={styles.search}
 					type="search"
-					placeholder="Поиск по названию"
+					placeholder={t("listingFeed.searchPlaceholder")}
 					value={search}
 					onChange={(event) =>
 						updateAndResetPage(setSearch)(event.target.value)
@@ -101,7 +104,7 @@ export function ListingFeed({
 						updateAndResetPage(setCategoryId)(event.target.value)
 					}
 				>
-					<option value="">Все категории</option>
+					<option value="">{t("listingFeed.allCategories")}</option>
 					{categories?.map((category) => (
 						<option key={category.id} value={category.id}>
 							{category.name}
@@ -116,8 +119,8 @@ export function ListingFeed({
 						)
 					}
 				>
-					<option value="">Любой статус</option>
-					{Object.entries(LISTING_STATUS_LABELS).map(([value, label]) => (
+					<option value="">{t("listingFeed.anyStatus")}</option>
+					{Object.entries(listingStatusLabels).map(([value, label]) => (
 						<option key={value} value={value}>
 							{label}
 						</option>
@@ -129,7 +132,7 @@ export function ListingFeed({
 						updateAndResetPage(setSort)(event.target.value as SortOption)
 					}
 				>
-					{Object.entries(SORT_LABELS).map(([value, label]) => (
+					{Object.entries(sortLabels).map(([value, label]) => (
 						<option key={value} value={value}>
 							{label}
 						</option>
@@ -138,9 +141,9 @@ export function ListingFeed({
 			</div>
 
 			{isLoading ? (
-				<p>Загрузка...</p>
+				<p>{t("common.loading")}</p>
 			) : !data || data.items.length === 0 ? (
-				<p>{emptyMessage}</p>
+				<p>{emptyMessage ?? t("listingFeed.defaultEmpty")}</p>
 			) : (
 				<div className={styles.grid} aria-busy={isFetching}>
 					{data.items.map((listing) => (
@@ -161,17 +164,15 @@ export function ListingFeed({
 						disabled={page <= 1}
 						onClick={() => setPage((p) => p - 1)}
 					>
-						Назад
+						{t("listingFeed.prev")}
 					</button>
-					<span>
-						Стр. {page} из {totalPages}
-					</span>
+					<span>{t("listingFeed.pageOf", { page, total: totalPages })}</span>
 					<button
 						type="button"
 						disabled={page >= totalPages}
 						onClick={() => setPage((p) => p + 1)}
 					>
-						Вперёд
+						{t("listingFeed.next")}
 					</button>
 				</div>
 			)}

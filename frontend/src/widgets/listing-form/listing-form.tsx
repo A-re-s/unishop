@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useGetCategoriesQuery } from "@/entities/category/api/category-api";
 import {
@@ -7,15 +8,13 @@ import {
 	useUpdateListingMutation,
 	useUploadListingPhotoMutation,
 } from "@/entities/listing/api/listing-api";
+import { useListingConditionLabels } from "@/entities/listing/lib/use-listing-labels";
 import type {
 	Listing,
 	ListingCondition,
 	ListingPhoto,
 } from "@/entities/listing/model/types";
-import {
-	LISTING_CONDITION_LABELS,
-	MAX_LISTING_PHOTOS,
-} from "@/entities/listing/model/types";
+import { MAX_LISTING_PHOTOS } from "@/entities/listing/model/types";
 import { generateId } from "@/shared/lib/generate-id";
 import { useToast } from "@/shared/ui/toast/toast-provider";
 import styles from "./listing-form.module.css";
@@ -32,9 +31,11 @@ interface ListingFormProps {
 }
 
 export function ListingForm({ listing }: ListingFormProps) {
+	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const { showToast } = useToast();
 	const { data: categories } = useGetCategoriesQuery();
+	const listingConditionLabels = useListingConditionLabels();
 	const [createListing, { isLoading: isCreating }] = useCreateListingMutation();
 	const [updateListing, { isLoading: isUpdating }] = useUpdateListingMutation();
 	const [uploadPhoto] = useUploadListingPhotoMutation();
@@ -89,7 +90,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 					}).unwrap();
 					setExistingPhotos((prev) => [...prev, photo]);
 				} catch {
-					showToast("Не удалось загрузить одно из фото.", "error");
+					showToast(t("listingForm.photoUploadError"), "error");
 				}
 			}
 			setIsUploadingPhoto(false);
@@ -113,7 +114,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 			await deletePhoto({ listingId: listing.id, photoId }).unwrap();
 			setExistingPhotos((prev) => prev.filter((photo) => photo.id !== photoId));
 		} catch {
-			showToast("Не удалось удалить фото.", "error");
+			showToast(t("listingForm.photoDeleteError"), "error");
 		}
 	}
 
@@ -150,7 +151,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 		try {
 			if (listing) {
 				await updateListing({ id: listing.id, data: values }).unwrap();
-				showToast("Изменения сохранены");
+				showToast(t("listingForm.updatedToast"));
 				navigate(`/listings/${listing.id}`);
 			} else {
 				const created = await createListing(values).unwrap();
@@ -162,16 +163,14 @@ export function ListingForm({ listing }: ListingFormProps) {
 						}).unwrap();
 					} catch {
 						// Listing was created successfully — a failed photo isn't fatal.
-						showToast("Не удалось загрузить одно из фото.", "error");
+						showToast(t("listingForm.photoUploadError"), "error");
 					}
 				}
-				showToast("Объявление опубликовано");
+				showToast(t("listingForm.createdToast"));
 				navigate(`/listings/${created.id}`);
 			}
 		} catch {
-			setError(
-				"Не удалось сохранить объявление. Проверьте поля и попробуйте снова.",
-			);
+			setError(t("listingForm.submitError"));
 			setIsSubmitting(false);
 		}
 	}
@@ -183,7 +182,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 			{error && <p className={styles.error}>{error}</p>}
 
 			<label className={styles.field}>
-				<span>Название</span>
+				<span>{t("listingForm.fields.title")}</span>
 				<input
 					type="text"
 					value={title}
@@ -194,7 +193,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 			</label>
 
 			<label className={styles.field}>
-				<span>Описание</span>
+				<span>{t("listingForm.fields.description")}</span>
 				<textarea
 					value={description}
 					onChange={(event) => setDescription(event.target.value)}
@@ -205,7 +204,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 
 			<div className={styles.row}>
 				<label className={styles.field}>
-					<span>Цена, ₽</span>
+					<span>{t("listingForm.fields.price")}</span>
 					<input
 						type="number"
 						min="0.01"
@@ -217,14 +216,14 @@ export function ListingForm({ listing }: ListingFormProps) {
 				</label>
 
 				<label className={styles.field}>
-					<span>Категория</span>
+					<span>{t("listingForm.fields.category")}</span>
 					<select
 						value={categoryId}
 						onChange={(event) => setCategoryId(event.target.value)}
 						required
 					>
 						<option value="" disabled>
-							Выберите категорию
+							{t("listingForm.fields.categoryPlaceholder")}
 						</option>
 						{categories?.map((category) => (
 							<option key={category.id} value={category.id}>
@@ -235,14 +234,14 @@ export function ListingForm({ listing }: ListingFormProps) {
 				</label>
 
 				<label className={styles.field}>
-					<span>Состояние</span>
+					<span>{t("listingForm.fields.condition")}</span>
 					<select
 						value={condition}
 						onChange={(event) =>
 							setCondition(event.target.value as ListingCondition)
 						}
 					>
-						{Object.entries(LISTING_CONDITION_LABELS).map(([value, label]) => (
+						{Object.entries(listingConditionLabels).map(([value, label]) => (
 							<option key={value} value={value}>
 								{label}
 							</option>
@@ -253,7 +252,10 @@ export function ListingForm({ listing }: ListingFormProps) {
 
 			<div className={styles.field}>
 				<span>
-					Фото ({totalPhotoCount}/{MAX_LISTING_PHOTOS})
+					{t("listingForm.photos.label", {
+						count: totalPhotoCount,
+						max: MAX_LISTING_PHOTOS,
+					})}
 				</span>
 				{/* biome-ignore lint/a11y/noStaticElementInteractions: drag&drop is a progressive enhancement — the file input below is the accessible fallback */}
 				<div
@@ -261,9 +263,9 @@ export function ListingForm({ listing }: ListingFormProps) {
 					onDragOver={(event) => event.preventDefault()}
 					onDrop={handleDrop}
 				>
-					<p>Перетащите фото сюда или</p>
+					<p>{t("listingForm.photos.dropHint")}</p>
 					<label className={styles.fileLabel}>
-						выберите файлы
+						{t("listingForm.photos.chooseFiles")}
 						<input
 							type="file"
 							accept="image/*"
@@ -289,7 +291,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 										<button
 											type="button"
 											onClick={() => handleRemoveExistingPhoto(photo.id)}
-											aria-label="Удалить фото"
+											aria-label={t("listingForm.photos.remove")}
 										>
 											×
 										</button>
@@ -301,7 +303,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 										<button
 											type="button"
 											onClick={() => handleRemoveStagedPhoto(photo.id)}
-											aria-label="Удалить фото"
+											aria-label={t("listingForm.photos.remove")}
 										>
 											×
 										</button>
@@ -312,7 +314,7 @@ export function ListingForm({ listing }: ListingFormProps) {
 			</div>
 
 			<button type="submit" className={styles.submit} disabled={isSaving}>
-				{listing ? "Сохранить изменения" : "Опубликовать объявление"}
+				{listing ? t("listingForm.submitEdit") : t("listingForm.submitCreate")}
 			</button>
 		</form>
 	);

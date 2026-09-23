@@ -1,0 +1,125 @@
+{
+	"common": {
+		"loading": "加载中...",
+		"cancel": "取消",
+		"save": "保存",
+		"delete": "删除",
+		"edit": "编辑",
+		"noPhoto": "无照片"
+	},
+	"nav": {
+		"recommendations": "推荐",
+		"favorites": "收藏",
+		"createListing": "+",
+		"profile": "个人资料"
+	},
+	"auth": {
+		"login": "登录",
+		"logout": "退出登录"
+	},
+	"loginPage": {
+		"title": "Unishop",
+		"subtitle": "大学分类信息板"
+	},
+	"homePage": {
+		"title": "推荐",
+		"empty": "暂无有效商品。"
+	},
+	"favoritesPage": {
+		"title": "收藏",
+		"empty": "您还没有添加任何收藏。"
+	},
+	"listingFeed": {
+		"defaultEmpty": "未找到任何内容。",
+		"searchPlaceholder": "按标题搜索",
+		"allCategories": "所有分类",
+		"anyStatus": "任意状态",
+		"sort": {
+			"createdDesc": "最新优先",
+			"createdAsc": "最早优先",
+			"priceAsc": "价格从低到高",
+			"priceDesc": "价格从高到低"
+		},
+		"prev": "上一页",
+		"next": "下一页",
+		"pageOf": "第 {{page}} 页，共 {{total}} 页"
+	},
+	"listingCard": {
+		"addFavorite": "添加到收藏",
+		"removeFavorite": "从收藏中移除",
+		"updateFavoriteError": "无法更新收藏"
+	},
+	"listingCondition": {
+		"new": "全新",
+		"used": "二手"
+	},
+	"listingStatus": {
+		"active": "在售",
+		"reserved": "已预订",
+		"sold": "已售出"
+	},
+	"listingDetail": {
+		"seller": "卖家",
+		"category": "分类",
+		"condition": "成色",
+		"createdAt": "发布日期",
+		"changeStatus": "更改状态：",
+		"deleteConfirm": "删除该商品？此操作无法撤销。",
+		"deletedToast": "商品已删除",
+		"deleteErrorToast": "无法删除商品",
+		"statusUpdatedToast": "状态已更新",
+		"statusErrorToast": "无法更改状态",
+		"notFound": "未找到该商品。"
+	},
+	"listingForm": {
+		"createTitle": "发布新商品",
+		"editTitle": "编辑商品",
+		"fields": {
+			"title": "标题",
+			"description": "描述",
+			"price": "价格，₽",
+			"category": "分类",
+			"categoryPlaceholder": "选择分类",
+			"condition": "成色"
+		},
+		"photos": {
+			"label": "照片（{{count}}/{{max}}）",
+			"dropHint": "将照片拖到此处，或",
+			"chooseFiles": "选择文件",
+			"remove": "删除照片"
+		},
+		"submitCreate": "发布商品",
+		"submitEdit": "保存更改",
+		"submitError": "无法保存商品，请检查各项后重试。",
+		"photoUploadError": "有一张照片上传失败。",
+		"photoDeleteError": "无法删除照片。",
+		"createdToast": "商品已发布",
+		"updatedToast": "更改已保存"
+	},
+	"profilePage": {
+		"title": "个人资料",
+		"changePhoto": "更换照片",
+		"uploading": "上传中...",
+		"removePhoto": "删除照片",
+		"usernameLabel": "用户名",
+		"telegramLabel": "Telegram",
+		"editProfile": "编辑资料",
+		"telegramNotSet": "未设置 Telegram",
+		"myListings": "我的商品",
+		"myListingsEmpty": "您还没有发布任何商品。",
+		"language": "语言",
+		"updatedToast": "资料已更新",
+		"updateErrorToast": "无法保存资料",
+		"avatarUpdatedToast": "头像已更新",
+		"avatarErrorToast": "无法上传照片",
+		"avatarRemovedToast": "头像已删除",
+		"avatarRemoveErrorToast": "无法删除照片"
+	},
+	"userProfilePage": {
+		"title": "用户资料",
+		"telegramNotSet": "未设置 Telegram",
+		"listingsTitle": "该用户的商品",
+		"listingsEmpty": "该用户暂无在售商品。",
+		"notFound": "未找到该用户。"
+	}
+}

@@ -1,18 +1,15 @@
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
 	useFavoriteListingMutation,
 	useUnfavoriteListingMutation,
 } from "@/entities/listing/api/listing-api";
+import { useListingStatusLabels } from "@/entities/listing/lib/use-listing-labels";
 import type { Listing } from "@/entities/listing/model/types";
-import { LISTING_STATUS_LABELS } from "@/entities/listing/model/types";
+import { INTL_TAG, type Locale } from "@/entities/locale/model/types";
 import { useToast } from "@/shared/ui/toast/toast-provider";
 import styles from "./listing-card.module.css";
-
-const priceFormatter = new Intl.NumberFormat("ru-RU", {
-	style: "currency",
-	currency: "RUB",
-	maximumFractionDigits: 0,
-});
 
 interface ListingCardProps {
 	listing: Listing;
@@ -25,10 +22,23 @@ export function ListingCard({
 	categoryName,
 	isOwn,
 }: ListingCardProps) {
+	const { t, i18n } = useTranslation();
+	const locale = i18n.resolvedLanguage as Locale;
+	const listingStatusLabels = useListingStatusLabels();
 	const [favorite, { isLoading: isFavoriting }] = useFavoriteListingMutation();
 	const [unfavorite, { isLoading: isUnfavoriting }] =
 		useUnfavoriteListingMutation();
 	const { showToast } = useToast();
+
+	const priceFormatter = useMemo(
+		() =>
+			new Intl.NumberFormat(INTL_TAG[locale], {
+				style: "currency",
+				currency: "RUB",
+				maximumFractionDigits: 0,
+			}),
+		[locale],
+	);
 
 	const handleToggleFavorite = async (event: React.MouseEvent) => {
 		event.preventDefault();
@@ -39,7 +49,7 @@ export function ListingCard({
 				await favorite(listing.id).unwrap();
 			}
 		} catch {
-			showToast("Не удалось обновить избранное", "error");
+			showToast(t("listingCard.updateFavoriteError"), "error");
 		}
 	};
 
@@ -53,11 +63,11 @@ export function ListingCard({
 						alt={listing.title}
 					/>
 				) : (
-					<div className={styles.imagePlaceholder}>Нет фото</div>
+					<div className={styles.imagePlaceholder}>{t("common.noPhoto")}</div>
 				)}
 				{listing.status !== "active" && (
 					<span className={styles.statusBadge}>
-						{LISTING_STATUS_LABELS[listing.status]}
+						{listingStatusLabels[listing.status]}
 					</span>
 				)}
 				{!isOwn && (
@@ -68,8 +78,8 @@ export function ListingCard({
 						disabled={isFavoriting || isUnfavoriting}
 						aria-label={
 							listing.is_favorite
-								? "Убрать из избранного"
-								: "Добавить в избранное"
+								? t("listingCard.removeFavorite")
+								: t("listingCard.addFavorite")
 						}
 					>
 						{listing.is_favorite ? "♥" : "♡"}

@@ -1,0 +1,125 @@
+{
+	"common": {
+		"loading": "Loading...",
+		"cancel": "Cancel",
+		"save": "Save",
+		"delete": "Delete",
+		"edit": "Edit",
+		"noPhoto": "No photo"
+	},
+	"nav": {
+		"recommendations": "Recommendations",
+		"favorites": "Favorites",
+		"createListing": "+",
+		"profile": "Profile"
+	},
+	"auth": {
+		"login": "Log in",
+		"logout": "Log out"
+	},
+	"loginPage": {
+		"title": "Unishop",
+		"subtitle": "University classifieds board"
+	},
+	"homePage": {
+		"title": "Recommendations",
+		"empty": "No active listings yet."
+	},
+	"favoritesPage": {
+		"title": "Favorites",
+		"empty": "You haven't added anything to favorites yet."
+	},
+	"listingFeed": {
+		"defaultEmpty": "Nothing found.",
+		"searchPlaceholder": "Search by title",
+		"allCategories": "All categories",
+		"anyStatus": "Any status",
+		"sort": {
+			"createdDesc": "Newest first",
+			"createdAsc": "Oldest first",
+			"priceAsc": "Price: low to high",
+			"priceDesc": "Price: high to low"
+		},
+		"prev": "Back",
+		"next": "Next",
+		"pageOf": "Page {{page}} of {{total}}"
+	},
+	"listingCard": {
+		"addFavorite": "Add to favorites",
+		"removeFavorite": "Remove from favorites",
+		"updateFavoriteError": "Couldn't update favorites"
+	},
+	"listingCondition": {
+		"new": "New",
+		"used": "Used"
+	},
+	"listingStatus": {
+		"active": "Active",
+		"reserved": "Reserved",
+		"sold": "Sold"
+	},
+	"listingDetail": {
+		"seller": "Seller",
+		"category": "Category",
+		"condition": "Condition",
+		"createdAt": "Listed on",
+		"changeStatus": "Change status:",
+		"deleteConfirm": "Delete this listing? This can't be undone.",
+		"deletedToast": "Listing deleted",
+		"deleteErrorToast": "Couldn't delete the listing",
+		"statusUpdatedToast": "Status updated",
+		"statusErrorToast": "Couldn't change the status",
+		"notFound": "Listing not found."
+	},
+	"listingForm": {
+		"createTitle": "New listing",
+		"editTitle": "Edit listing",
+		"fields": {
+			"title": "Title",
+			"description": "Description",
+			"price": "Price, ₽",
+			"category": "Category",
+			"categoryPlaceholder": "Choose a category",
+			"condition": "Condition"
+		},
+		"photos": {
+			"label": "Photos ({{count}}/{{max}})",
+			"dropHint": "Drag photos here or",
+			"chooseFiles": "choose files",
+			"remove": "Remove photo"
+		},
+		"submitCreate": "Publish listing",
+		"submitEdit": "Save changes",
+		"submitError": "Couldn't save the listing. Check the fields and try again.",
+		"photoUploadError": "Couldn't upload one of the photos.",
+		"photoDeleteError": "Couldn't delete the photo.",
+		"createdToast": "Listing published",
+		"updatedToast": "Changes saved"
+	},
+	"profilePage": {
+		"title": "Profile",
+		"changePhoto": "Change photo",
+		"uploading": "Uploading...",
+		"removePhoto": "Remove photo",
+		"usernameLabel": "Username",
+		"telegramLabel": "Telegram",
+		"editProfile": "Edit profile",
+		"telegramNotSet": "Telegram not set",
+		"myListings": "My listings",
+		"myListingsEmpty": "You don't have any listings yet.",
+		"language": "Language",
+		"updatedToast": "Profile updated",
+		"updateErrorToast": "Couldn't save the profile",
+		"avatarUpdatedToast": "Profile photo updated",
+		"avatarErrorToast": "Couldn't upload the photo",
+		"avatarRemovedToast": "Profile photo removed",
+		"avatarRemoveErrorToast": "Couldn't remove the photo"
+	},
+	"userProfilePage": {
+		"title": "User profile",
+		"telegramNotSet": "Telegram not set",
+		"listingsTitle": "User's listings",
+		"listingsEmpty": "This user has no active listings yet.",
+		"notFound": "User not found."
+	}
+}
