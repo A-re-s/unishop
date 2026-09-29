@@ -1,59 +1,59 @@
 # Unishop
 
-Доска объявлений для университета: студенты публикуют объявления (учебники, техника, мебель и т.д.), ищут их по категориям и статусу, добавляют в избранное и связываются с продавцом через Telegram.
+A university classifieds board: students post listings (textbooks, electronics, furniture, etc.), search them by category and status, save favorites, and reach the seller via Telegram.
 
-![Лента объявлений — поиск, фильтры по категории и статусу, сортировка](docs/images/listing-feed.png)
+![Listing feed — search, category/status filters, sorting](docs/images/listing-feed.png)
 
-## Возможности
+## Features
 
-- **Профиль**: имя пользователя, Telegram-тег, аватар; публичный профиль с объявлениями пользователя.
-- **Объявления**: создание и редактирование (название, описание, цена, категория, состояние «новое/б/у»), до 10 фото на объявление (drag&drop или обычная загрузка).
-- **Статусы объявления**: активно → забронировано/продано, забронировано → активно/продано, продано — финальный статус. Менять может только автор.
-- **Лента объявлений**: поиск по названию, фильтр по категории и статусу, сортировка по цене/дате, пагинация — один переиспользуемый компонент для Главной, Избранного и «Моих объявлений».
-- **Избранное**: добавление/удаление прямо с карточки объявления.
-- **Авторизация** через Keycloak (OAuth2/OIDC, Authorization Code Flow): вход и самостоятельная регистрация (логин, пароль, обязательный Telegram-тег), серверная сессия в Redis, полноценный logout (в том числе завершение SSO-сессии в Keycloak).
-- **Локализация** — 13 языков (топ-13 в мире по числу говорящих: ru, en, zh, hi, es, fr, ar, bn, pt, ur, id, de, ja; для ar/ur автоматически переключается направление текста на RTL). При первом визите язык резолвится в таком порядке — сохранённый выбор из `localStorage` → заголовок `Accept-Language` браузера → геолокация по IP (бэкенд, `GET /v1/locale/detect`) → дефолт `en`. Результат пишется в `localStorage`, дальше используется без повторных запросов. Сменить язык вручную можно в настройках профиля — выбор тоже сохраняется в `localStorage` и перебивает автоопределение.
+- **Profile**: username, Telegram handle, avatar; a public profile showing the user's listings.
+- **Listings**: create and edit (title, description, price, category, condition "new/used"), up to 10 photos per listing (drag&drop or a regular upload).
+- **Listing statuses**: active → booked/sold, booked → active/sold, sold is final. Only the author can change it.
+- **Listing feed**: search by title, filter by category and status, sort by price/date, pagination — one reusable component shared by Home, Favorites, and "My listings".
+- **Favorites**: add/remove right from the listing card.
+- **Authentication** via Keycloak (OAuth2/OIDC, Authorization Code Flow): login and self-service registration (login, password, required Telegram handle), server-side session in Redis, full logout (including ending the SSO session in Keycloak).
+- **Localization** — 13 languages (the world's top 13 by number of speakers: ru, en, zh, hi, es, fr, ar, bn, pt, ur, id, de, ja; ar/ur automatically switch the text direction to RTL). On first visit the language is resolved in this order — saved choice from `localStorage` → the browser's `Accept-Language` header → IP geolocation (backend, `GET /v1/locale/detect`) → default `en`. The result is written to `localStorage` and used without repeating the lookup. The language can be changed manually in profile settings — that choice is also saved to `localStorage` and overrides auto-detection.
 
-## Стек
+## Stack
 
-**Backend** — FastAPI, SQLAlchemy 2.0 (async) + Alembic, PostgreSQL, Redis (сессии), Keycloak (OIDC), MinIO (S3-совместимое хранилище фото), Authlib, слои Repository + Unit of Work, Ruff, pytest, [uv](https://docs.astral.sh/uv/).
+**Backend** — FastAPI, SQLAlchemy 2.0 (async) + Alembic, PostgreSQL, Redis (sessions), Keycloak (OIDC), MinIO (S3-compatible photo storage), Authlib, Repository + Unit of Work layers, Ruff, pytest, [uv](https://docs.astral.sh/uv/).
 
-**Frontend** — React 19 + TypeScript, Vite, Redux Toolkit / RTK Query, React Router v7, Feature-Sliced Design, CSS Modules, Biome, Vitest + Testing Library, [Volta](https://volta.sh) (фиксированные версии Node/npm).
+**Frontend** — React 19 + TypeScript, Vite, Redux Toolkit / RTK Query, React Router v7, Feature-Sliced Design, CSS Modules, Biome, Vitest + Testing Library, [Volta](https://volta.sh) (pinned Node/npm versions).
 
-**Инфраструктура** — Docker Compose (отдельные dev- и prod-стеки), nginx (единая точка входа в проде), GitHub Actions (CI + проверка Conventional Commits), pre-commit, Commitizen (semantic versioning), Justfile для всех команд разработки.
+**Infrastructure** — Docker Compose (separate dev and prod stacks), nginx (single entry point in prod), GitHub Actions (CI + Conventional Commits check), pre-commit, Commitizen (semantic versioning), a Justfile for all development commands.
 
-## Структура репозитория
+## Repository layout
 
 ```
 .
-├── backend/                  # FastAPI-приложение
+├── backend/                  # FastAPI application
 │   └── src/backend/
-│       ├── api/               # роутеры и зависимости
-│       ├── core/               # конфиг, безопасность, S3-хранилище
-│       ├── db/                 # модели, миграции Alembic, Unit of Work
+│       ├── api/               # routers and dependencies
+│       ├── core/               # config, security, S3 storage
+│       ├── db/                 # models, Alembic migrations, Unit of Work
 │       ├── repositories/
 │       ├── schemas/
 │       └── services/
 ├── frontend/                 # React SPA (Feature-Sliced Design)
 │   └── src/{app,pages,widgets,features,entities,shared}/
-├── keycloak/realm-import.json  # конфигурация OIDC-реалма
-├── nginx/nginx.conf            # прод-конфиг единой точки входа
-├── scripts/seed.py             # наполнение dev-базы тестовыми данными
-├── docker-compose.yml           # dev-стек
-├── docker-compose.prod.yml      # прод-стек (+ nginx)
-└── Justfile                     # команды разработки
+├── keycloak/realm-import.json  # OIDC realm configuration
+├── nginx/nginx.conf            # prod single-entry-point config
+├── scripts/seed.py             # seeds the dev DB with test data
+├── docker-compose.yml           # dev stack
+├── docker-compose.prod.yml      # prod stack (+ nginx)
+└── Justfile                     # development commands
 ```
 
-## Требования
+## Requirements
 
-- Docker и Docker Compose
+- Docker and Docker Compose
 - [just](https://github.com/casey/just)
 
-Для запуска бэкенда/фронтенда вне Docker понадобятся ещё [uv](https://docs.astral.sh/uv/) и [Volta](https://volta.sh) соответственно, но для обычной разработки это не нужно — всё поднимается через Docker Compose.
+Running the backend/frontend outside Docker additionally requires [uv](https://docs.astral.sh/uv/) and [Volta](https://volta.sh) respectively, but that's not needed for regular development — everything runs via Docker Compose.
 
-## Быстрый старт
+## Quick start
 
-1. Подготовить переменные окружения (значения по умолчанию рабочие для локальной разработки, менять не обязательно):
+1. Prepare environment variables (the defaults already work for local development, no need to change them):
 
    ```bash
    cp .env.example .env
@@ -61,54 +61,54 @@
    cp frontend/.env.example frontend/.env
    ```
 
-2. Поднять весь стек:
+2. Bring up the whole stack:
 
    ```bash
    just up
    ```
 
-   Поднимутся: PostgreSQL, Redis, Keycloak (со своей БД), MinIO, backend (`:8000`), frontend (`:5173`).
+   This starts: PostgreSQL, Redis, Keycloak (with its own DB), MinIO, backend (`:8000`), frontend (`:5173`).
 
-3. Применить миграции БД (один раз, после первого запуска):
+3. Apply DB migrations (once, after the first startup):
 
    ```bash
    just migrate
    ```
 
-4. (опционально) Наполнить базу тестовыми пользователями и объявлениями:
+4. (optional) Seed the database with test users and listings:
 
    ```bash
    just seed
    ```
 
-   Создаст пользователей `demo1` / `demo2` / `demo3` (пароль `Demo12345!`, все с настроенным Telegram-тегом) и набор объявлений в разных категориях и статусах — удобно для ручной проверки без регистрации вручную.
+   Creates users `demo1` / `demo2` / `demo3` (password `Demo12345!`, all with a Telegram handle set) and a set of listings across different categories and statuses — handy for manual testing without registering by hand.
 
-5. Открыть приложение: **http://localhost:5173**
+5. Open the app: **http://localhost:5173**
 
-Полезные адреса:
+Useful addresses:
 
-| Сервис | URL | Доступ по умолчанию |
+| Service | URL | Default credentials |
 |---|---|---|
 | Frontend | http://localhost:5173 | — |
 | Backend (Swagger UI) | http://localhost:8000/docs | — |
 | Keycloak Admin Console | http://localhost:8080 | `admin` / `change-me` |
 | MinIO Console | http://localhost:9001 | `unishop` / `change-me` |
 
-Остановить стек: `just down`.
+Stop the stack: `just down`.
 
-## Продакшн
+## Production
 
 ```bash
 just up-prod
 ```
 
-Поднимает тот же набор сервисов, но с production-сборками (без bind-mount'ов и hot-reload) и добавляет **nginx** как единую точку входа на `:80`: раздаёт статику фронтенда, проксирует `/api/` на backend и `/media/` на MinIO (сам MinIO наружу не публикуется). Keycloak при этом продолжает торчать наружу отдельным портом (по умолчанию `:8080`) — так же, как и в dev.
+Brings up the same set of services but with production builds (no bind mounts, no hot-reload) and adds **nginx** as a single entry point on `:80`: it serves the frontend's static files, proxies `/api/` to the backend and `/media/` to MinIO (MinIO itself isn't published). Keycloak keeps being exposed on its own port (`:8080` by default) — same as in dev.
 
-### Деплой на домене или отдельном IP
+### Deploying on a domain or a bare IP
 
-По умолчанию всё настроено на `localhost` — чтобы поднять на реальном домене или чужом IP (`<host>` ниже):
+Everything defaults to `localhost` — to run it on a real domain or someone else's IP (`<host>` below):
 
-1. Подготовить `.env` и `backend/.env` как в «Быстром старте», затем в `backend/.env` явно задать (без этого браузер будет ходить обратно на `localhost` и логин не сработает — см. пример в `backend/.env.example`):
+1. Prepare `.env` and `backend/.env` as in "Quick start", then explicitly set in `backend/.env` (without this the browser will fall back to `localhost` and login won't work — see the example in `backend/.env.example`):
 
    ```bash
    FRONTEND_BASE_URL=http://<host>
@@ -116,42 +116,46 @@ just up-prod
    PHOTOS_PUBLIC_BASE_URL=http://<host>/media
    ```
 
-2. `just up-prod`, затем один раз `just migrate-prod` (миграции не накатываются автоматически — как и в dev; на проде именно `migrate-prod`, а не `migrate` — Postgres там наружу не публикуется, `migrate` пытается достучаться до него с хоста напрямую и не найдёт).
+2. `just up-prod`, then once `just migrate-prod` (migrations aren't applied automatically, same as in dev; on prod it's specifically `migrate-prod`, not `migrate` — Postgres isn't published there, so `migrate` tries to reach it directly from the host and fails to find it).
 
-3. Разрешить в Keycloak колбэк на новый адрес — этого нельзя сделать заранее, домен/IP неизвестен на этапе сборки образа. Один раз через админку (`http://<host>:8080` → realm `unishop` → client `unishop-backend`):
-   - **Valid redirect URIs** — добавить `http://<host>/api/v1/auth/callback`;
-   - **Valid post logout redirect URIs** — добавить `http://<host>/*`.
+3. Allow the callback for the new address in Keycloak — this can't be done ahead of time, since the domain/IP isn't known at image build time. Do it once through the admin console (`http://<host>:8080` → realm `unishop` → client `unishop-backend`):
+   - **Valid redirect URIs** — add `http://<host>/api/v1/auth/callback`;
+   - **Valid post logout redirect URIs** — add `http://<host>/*`.
 
-   Без этого шага Keycloak будет отвечать `invalid_redirect_uri` на попытку логина/логаута с нового адреса.
+   Without this step Keycloak will respond with `invalid_redirect_uri` on any login/logout attempt from the new address.
 
-> `docker-compose.prod.yml` — рабочий каркас для деплоя, но перед реальным продакшеном (реальным интернет-трафиком, а не просто «завести на IP для проверки») стоит ещё: задать собственные пароли и секреты (в `.env`/`backend/.env` по умолчанию — заглушки `change-me`), поставить TLS перед nginx, после чего включить `SESSION_COOKIE_SECURE=true` в `backend/.env` (до HTTPS оставляйте `false`, иначе браузер молча не сохранит сессионную куку) и перевести Keycloak в строгий hostname-режим с HTTPS (сейчас `--hostname-strict=false`, что удобно для локальной проверки прод-сборки, но не для реального интернета).
+> `docker-compose.prod.yml` is a working scaffold for deployment, but before real production traffic (not just "stand it up on an IP to check it works") you should also: set your own passwords and secrets (in `.env`/`backend/.env` they default to `change-me` placeholders), put TLS in front of nginx, then enable `SESSION_COOKIE_SECURE=true` in `backend/.env` (leave it `false` until HTTPS is in place, otherwise the browser silently drops the session cookie), and switch Keycloak to strict hostname mode with HTTPS (it currently runs with `--hostname-strict=false`, which is convenient for checking the prod build locally but not for real internet traffic).
 
-## Разработка
+## Development
 
-Все команды — через `just` (`just --list` — полный список):
+All commands go through `just` (`just --list` for the full list):
 
-| Команда | Назначение |
+| Command | Purpose |
 |---|---|
-| `just lint` / `just lint-fix` | линт бэкенда (Ruff) и фронтенда (Biome) |
-| `just format` / `just format-check` | форматирование |
-| `just test` | тесты бэкенда (pytest) и фронтенда (Vitest) |
-| `just makemigrations "message"` | сгенерировать Alembic-миграцию из изменений моделей |
-| `just migrate` / `just migrate-down` | применить / откатить миграции (dev) |
-| `just migrate-prod` / `just migrate-down-prod` | то же самое, но на прод-стеке (`docker-compose.prod.yml`) |
-| `just precommit-install` | поставить git-хуки (один раз после клонирования) |
-| `just precommit` | прогнать все pre-commit хуки вручную |
-| `just logs` / `just logs-backend` / `just logs-frontend` | логи контейнеров |
-| `just restart` / `just restart-backend` / `just restart-frontend` | перезапуск |
+| `just lint` / `just lint-fix` | lint the backend (Ruff) and frontend (Biome) |
+| `just format` / `just format-check` | formatting |
+| `just test` | backend (pytest) and frontend (Vitest) tests |
+| `just makemigrations "message"` | generate an Alembic migration from model changes |
+| `just migrate` / `just migrate-down` | apply / revert migrations (dev) |
+| `just migrate-prod` / `just migrate-down-prod` | same, but on the prod stack (`docker-compose.prod.yml`) |
+| `just precommit-install` | install git hooks (once, after cloning) |
+| `just precommit` | run all pre-commit hooks manually |
+| `just logs` / `just logs-backend` / `just logs-frontend` | container logs |
+| `just restart` / `just restart-backend` / `just restart-frontend` | restart |
 
-## Коммиты и версионирование
+Architecture notes for AI agents (Claude Code, Codex, etc.) live in [AGENTS.md](AGENTS.md).
 
-Проект следует [Conventional Commits](https://www.conventionalcommits.org/). PR-ы мёржатся squash'ем, поэтому конвенции должен соответствовать **заголовок PR** — это проверяется отдельным CI-джобом. Версии (`backend/pyproject.toml`, `frontend/package.json`) и `CHANGELOG.md` обновляются через [Commitizen](https://commitizen-tools.github.io/commitizen/):
+## Commits and versioning
+
+The project follows [Conventional Commits](https://www.conventionalcommits.org/). PRs are squash-merged, so it's the **PR title** that must follow the convention — a dedicated CI job checks that. The version (`backend/pyproject.toml`, `frontend/package.json`) and `CHANGELOG.md` are updated through [Commitizen](https://commitizen-tools.github.io/commitizen/) **automatically** — the `Release` CI job bumps the version, updates the changelog, and creates a git tag and a GitHub Release on every push to `master` (except its own `bump:` commits, to avoid looping). The only manual step is `just bump-preview`, to preview the next version and changelog without changing anything:
 
 ```bash
-just bump-preview     # посмотреть будущую версию и changelog, ничего не меняя
-cz bump --changelog   # забампать версию и обновить CHANGELOG.md
+just bump-preview     # preview the next version and changelog, no changes
+cz bump --changelog   # manual local bump — usually not needed, see above
 ```
 
 ## CI
 
-На каждый PR в `master` (GitHub Actions): линт и тесты бэкенда (Ruff, pytest), линт/сборка/тесты фронтенда (Biome, `tsc` + `vite build`, Vitest), проверка заголовка PR на соответствие Conventional Commits.
+On every PR to `master` (GitHub Actions, `ci.yml`): backend lint and tests (Ruff, pytest), frontend lint/build/tests (Biome, `tsc` + `vite build`, Vitest), a check that the PR title follows Conventional Commits (`pr-title.yml`).
+
+On every push to `master` (`release.yml`): an automatic version bump, `CHANGELOG.md` update, git tag, and GitHub Release via Commitizen — see "Commits and versioning" above.
