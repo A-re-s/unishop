@@ -1,3 +1,9 @@
+## v0.7.0 (2026-09-29)
+
+### Feat
+
+- add agent docs and update readme (#10)
+
 ## v0.6.0 (2026-09-23)
 
 ### Feat
